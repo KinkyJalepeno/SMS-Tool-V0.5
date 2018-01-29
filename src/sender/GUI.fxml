@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="594.0" style="-fx-background-color: #dedfe0;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sender.Controller">
+   <children>
+      <TextArea fx:id="console" layoutX="304.0" layoutY="159.0" prefHeight="367.0" prefWidth="281.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a6a7a8" height="93.0" layoutX="14.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a6a7a8" height="93.0" layoutX="304.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a6a7a8" height="190.0" layoutX="14.0" layoutY="129.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a6a7a8" height="190.0" layoutX="14.0" layoutY="335.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
+      <Label layoutX="20.0" layoutY="136.0" prefHeight="20.0" prefWidth="107.0" text="Sending Options">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="20.0" layoutY="342.0" prefHeight="20.0" prefWidth="120.0" text="Queue Operations">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Button fx:id="clear" layoutX="401.0" layoutY="124.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Clear" />
+      <Button fx:id="connect" layoutX="99.0" layoutY="72.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Connect" />
+      <TextField fx:id="ipAddress" layoutX="24.0" layoutY="43.0" prefHeight="25.0" prefWidth="128.0" />
+      <TextField fx:id="passWord" layoutX="160.0" layoutY="43.0" prefHeight="25.0" prefWidth="128.0" />
+      <Label layoutX="25.0" layoutY="20.0" prefHeight="17.0" prefWidth="100.0" text="IP Address" />
+      <Label layoutX="160.0" layoutY="20.0" prefHeight="17.0" prefWidth="114.0" text="SMS Password" />
+      <Button fx:id="randPort" layoutX="20.0" layoutY="167.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Random Port" />
+      <Button fx:id="cardPort" layoutX="20.0" layoutY="207.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Card and Port" />
+      <Button fx:id="allPorts" layoutX="20.0" layoutY="246.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="All Ports of Card" />
+      <Button fx:id="allCards" layoutX="20.0" layoutY="285.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="All Cards/Ports" />
+      <Label layoutX="134.0" layoutY="211.0" prefHeight="17.0" prefWidth="52.0" text="Card" />
+      <Label layoutX="218.0" layoutY="211.0" prefHeight="17.0" prefWidth="52.0" text="Port" />
+      <TextField fx:id="card" layoutX="169.0" layoutY="207.0" prefHeight="25.0" prefWidth="31.0" />
+      <TextField fx:id="port" layoutX="255.0" layoutY="207.0" prefHeight="25.0" prefWidth="31.0" />
+      <Label layoutX="134.0" layoutY="250.0" prefHeight="17.0" prefWidth="52.0" text="Card" />
+      <TextField fx:id="card2" layoutX="169.0" layoutY="246.0" prefHeight="25.0" prefWidth="31.0" />
+      <Label layoutX="315.0" layoutY="26.0" prefHeight="17.0" prefWidth="107.0" text="Connection Status:" />
+      <Label layoutX="315.0" layoutY="66.0" prefHeight="17.0" prefWidth="107.0" text="Server Status:" />
+      <Label fx:id="connStatus" layoutX="424.0" layoutY="26.0" prefHeight="17.0" prefWidth="128.0" text="Not Connected" textFill="#f22626" />
+      <Label fx:id="serverStatus" layoutX="424.0" layoutY="67.0" prefHeight="17.0" prefWidth="128.0" text="Unknown" textFill="#f22626" />
+      <Button fx:id="queryStand" layoutX="20.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Query Standard" />
+      <Button fx:id="flushStand" layoutX="20.0" layoutY="459.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Flush Standard" />
+      <Button fx:id="queryMast" layoutX="179.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Query Master" />
+      <Button fx:id="FlushMast" layoutX="179.0" layoutY="459.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Flush Master" />
+      <Label layoutX="305.0" layoutY="141.0" prefHeight="17.0" prefWidth="81.0" text="Console:" />
+   </children>
+</AnchorPane>

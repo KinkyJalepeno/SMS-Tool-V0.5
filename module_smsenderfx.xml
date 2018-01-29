@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_smsenderfx" default="compile.module.smsenderfx">
+  <dirname property="module.smsenderfx.basedir" file="${ant.file.module_smsenderfx}"/>
+  
+  <property name="module.jdk.home.smsenderfx" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.smsenderfx" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.smsenderfx" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.smsenderfx" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="smsenderfx.output.dir" value="${module.smsenderfx.basedir}/out/production/SMSenderFX"/>
+  <property name="smsenderfx.testoutput.dir" value="${module.smsenderfx.basedir}/out/test/SMSenderFX"/>
+  
+  <path id="smsenderfx.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="smsenderfx.module.production.classpath">
+    <path refid="${module.jdk.classpath.smsenderfx}"/>
+  </path>
+  
+  <path id="smsenderfx.runtime.production.module.classpath">
+    <pathelement location="${smsenderfx.output.dir}"/>
+  </path>
+  
+  <path id="smsenderfx.module.classpath">
+    <path refid="${module.jdk.classpath.smsenderfx}"/>
+    <pathelement location="${smsenderfx.output.dir}"/>
+  </path>
+  
+  <path id="smsenderfx.runtime.module.classpath">
+    <pathelement location="${smsenderfx.testoutput.dir}"/>
+    <pathelement location="${smsenderfx.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.smsenderfx">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.smsenderfx">
+    <patternset refid="excluded.from.module.smsenderfx"/>
+  </patternset>
+  
+  <path id="smsenderfx.module.sourcepath">
+    <dirset dir="${module.smsenderfx.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.smsenderfx" depends="compile.module.smsenderfx.production,compile.module.smsenderfx.tests" description="Compile module SMSenderFX"/>
+  
+  <target name="compile.module.smsenderfx.production" depends="register.custom.compilers" description="Compile module SMSenderFX; production classes">
+    <mkdir dir="${smsenderfx.output.dir}"/>
+    <javac2 destdir="${smsenderfx.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.smsenderfx}/javac">
+      <compilerarg line="${compiler.args.smsenderfx}"/>
+      <bootclasspath refid="smsenderfx.module.bootclasspath"/>
+      <classpath refid="smsenderfx.module.production.classpath"/>
+      <src refid="smsenderfx.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.smsenderfx"/>
+    </javac2>
+    
+    <copy todir="${smsenderfx.output.dir}">
+      <fileset dir="${module.smsenderfx.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.smsenderfx.tests" depends="register.custom.compilers,compile.module.smsenderfx.production" description="compile module SMSenderFX; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.smsenderfx" description="cleanup module">
+    <delete dir="${smsenderfx.output.dir}"/>
+    <delete dir="${smsenderfx.testoutput.dir}"/>
+  </target>
+</project>
