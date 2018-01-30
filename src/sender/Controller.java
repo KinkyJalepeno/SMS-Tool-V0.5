@@ -37,6 +37,7 @@ public class Controller {
     @FXML private TextField card;
     @FXML private TextField card2;
     @FXML private TextField port;
+    @FXML private TextField mobNumber;
 
     @FXML private TextArea console;
 
@@ -46,13 +47,17 @@ public class Controller {
 
 
 
-
-
-    public void button(ActionEvent connect) throws IOException {
+    public void button(ActionEvent connect)throws IOException{
 
     authenticate();
 
-    }// end button method
+    }// end button
+
+    public void sendR(ActionEvent event)throws IOException{
+
+    sendRandom();
+
+    }//end send random
 
     public void authenticate() throws IOException {
         Socket s = new Socket(ipAddress.getText(), 63333);
@@ -71,7 +76,7 @@ public class Controller {
             connStatus.setTextFill(Color.GREEN);
         }
     checkStatus(s);
-    }
+    }//end authenticate
 
     public void checkStatus(Socket s)throws IOException{
 
@@ -95,4 +100,9 @@ public class Controller {
         else serverStatus.setTextFill(Color.RED);
 
     }//end checkStatus
+
+    public void sendRandom(){
+
+
+    }
 }//end class
