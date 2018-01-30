@@ -18,30 +18,30 @@ import java.util.Scanner;
 public class Controller {
 
 
-    @FXML private Button connect;
-    @FXML private Button randPort;
-    @FXML private Button cardPort;
-    @FXML private Button allPorts;
-    @FXML private Button allCards;
-    @FXML private Button queryStand;
-    @FXML private Button flushStand;
-    @FXML private Button queryMast;
-    @FXML private Button FlushMast;
-    @FXML private Button clear;
-    @FXML private Button runServer;
-    @FXML private Button pauseServer;
+    @FXML public Button connect;
+    @FXML public Button randPort;
+    @FXML public Button cardPort;
+    @FXML public Button allPorts;
+    @FXML public Button allCards;
+    @FXML public Button queryStand;
+    @FXML public Button flushStand;
+    @FXML public Button queryMast;
+    @FXML public Button FlushMast;
+    @FXML public Button clear;
+    @FXML public Button runServer;
+    @FXML public Button pauseServer;
 
 
-    @FXML private TextField ipAddress;
-    @FXML private TextField passWord;
-    @FXML private TextField card;
-    @FXML private TextField card2;
-    @FXML private TextField port;
+    @FXML public TextField ipAddress;
+    @FXML public TextField passWord;
+    @FXML public TextField card;
+    @FXML public TextField card2;
+    @FXML public TextField port;
 
-    @FXML private TextArea console;
+    @FXML public TextArea console;
 
-    @FXML private Label connStatus;
-    @FXML private Label serverStatus;
+    @FXML public Label connStatus;
+    @FXML public Label serverStatus;
 
 
 
