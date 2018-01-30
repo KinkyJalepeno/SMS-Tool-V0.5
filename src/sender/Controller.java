@@ -25,11 +25,13 @@ public class Controller {
     @FXML public Button pauseServer;
 
 
+
     @FXML public static TextField ipAddress;
     @FXML public static TextField passWord;
     @FXML public TextField card;
     @FXML public TextField card2;
     @FXML public TextField port;
+    @FXML public TextField mobNumber;
 
     @FXML public static TextArea console;
 
