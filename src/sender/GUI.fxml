@@ -24,11 +24,17 @@
             <Font size="14.0" />
          </font></Label>
       <Button fx:id="clear" layoutX="401.0" layoutY="124.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Clear" />
-      <Button fx:id="connect" layoutX="99.0" layoutY="72.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Connect" />
+      <Button fx:id="connect" layoutX="99.0" layoutY="72.0" mnemonicParsing="false" onAction="#button" prefHeight="25.0" prefWidth="107.0" text="Connect" />
       <TextField fx:id="ipAddress" layoutX="24.0" layoutY="43.0" prefHeight="25.0" prefWidth="128.0" />
       <TextField fx:id="passWord" layoutX="160.0" layoutY="43.0" prefHeight="25.0" prefWidth="128.0" />
-      <Label layoutX="25.0" layoutY="20.0" prefHeight="17.0" prefWidth="100.0" text="IP Address" />
-      <Label layoutX="160.0" layoutY="20.0" prefHeight="17.0" prefWidth="114.0" text="SMS Password" />
+      <Label layoutX="25.0" layoutY="20.0" prefHeight="17.0" prefWidth="100.0" text="IP Address">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="160.0" layoutY="20.0" prefHeight="17.0" prefWidth="114.0" text="SMS Password">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <Button fx:id="randPort" layoutX="20.0" layoutY="167.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Random Port" />
       <Button fx:id="cardPort" layoutX="20.0" layoutY="207.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Card and Port" />
       <Button fx:id="allPorts" layoutX="20.0" layoutY="246.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="All Ports of Card" />
@@ -39,14 +45,33 @@
       <TextField fx:id="port" layoutX="255.0" layoutY="207.0" prefHeight="25.0" prefWidth="31.0" />
       <Label layoutX="134.0" layoutY="250.0" prefHeight="17.0" prefWidth="52.0" text="Card" />
       <TextField fx:id="card2" layoutX="169.0" layoutY="246.0" prefHeight="25.0" prefWidth="31.0" />
-      <Label layoutX="315.0" layoutY="26.0" prefHeight="17.0" prefWidth="107.0" text="Connection Status:" />
-      <Label layoutX="315.0" layoutY="66.0" prefHeight="17.0" prefWidth="107.0" text="Server Status:" />
-      <Label fx:id="connStatus" layoutX="424.0" layoutY="26.0" prefHeight="17.0" prefWidth="128.0" text="Not Connected" textFill="#f22626" />
-      <Label fx:id="serverStatus" layoutX="424.0" layoutY="67.0" prefHeight="17.0" prefWidth="128.0" text="Unknown" textFill="#f22626" />
-      <Button fx:id="queryStand" layoutX="20.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Query Standard" />
-      <Button fx:id="flushStand" layoutX="20.0" layoutY="459.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Flush Standard" />
-      <Button fx:id="queryMast" layoutX="179.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Query Master" />
-      <Button fx:id="FlushMast" layoutX="179.0" layoutY="459.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Flush Master" />
+      <Label layoutX="315.0" layoutY="26.0" prefHeight="17.0" prefWidth="107.0" text="Connection Status:">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="315.0" layoutY="66.0" prefHeight="17.0" prefWidth="107.0" text="Server Status:">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="connStatus" layoutX="424.0" layoutY="26.0" prefHeight="17.0" prefWidth="128.0" text="Not Connected" textFill="#f22626">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="serverStatus" layoutX="424.0" layoutY="67.0" prefHeight="17.0" prefWidth="128.0" text="Unknown" textFill="#f22626">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Button fx:id="queryStand" layoutX="20.0" layoutY="367.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Query Standard" />
+      <Button fx:id="flushStand" layoutX="20.0" layoutY="403.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Flush Standard" />
+      <Button fx:id="queryMast" layoutX="179.0" layoutY="367.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Query Master" />
+      <Button fx:id="FlushMast" layoutX="179.0" layoutY="403.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Flush Master" />
       <Label layoutX="305.0" layoutY="141.0" prefHeight="17.0" prefWidth="81.0" text="Console:" />
+      <Label layoutX="22.0" layoutY="447.0" prefHeight="20.0" prefWidth="120.0" text="Server Run/Pause">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="runServer" layoutX="22.0" layoutY="475.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Run Server" />
+      <Button fx:id="pauseServer" layoutX="179.0" layoutY="475.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Pause Server" />
    </children>
 </AnchorPane>
