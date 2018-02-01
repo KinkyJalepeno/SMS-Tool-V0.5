@@ -1,5 +1,6 @@
 package sender;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,11 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import sun.net.www.http.KeepAliveStream;
 
-import java.awt.*;
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Controller {
 
@@ -44,65 +44,27 @@ public class Controller {
     @FXML private Label connStatus;
     @FXML private Label serverStatus;
 
+    public void authentication(ActionEvent e) throws Exception {
 
-
-
-    public void button(ActionEvent connect)throws IOException{
-
-    authenticate();
-
-    }// end button
-
-    public void sendR(ActionEvent event)throws IOException{
-
-    sendRandom();
-
-    }//end send random
-
-    public void authenticate() throws IOException {
         Socket s = new Socket(ipAddress.getText(), 63333);
+        String pass = passWord.getText();
 
-        PrintWriter p = new PrintWriter(s.getOutputStream(), true);
-        BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
-        p.println("{\"method\":\"authentication\",\"server_password\":\"" + passWord.getText() + "\"}");
-        String response = bufRd.readLine();
-        p.println("");
-        response = bufRd.readLine();
-        console.appendText(response + "\n");
-
+        String response = sender.Main.authentication(s, pass);
         if (response.equals("SMS server connected")){
-            connStatus.setText("Connected");
             connStatus.setTextFill(Color.GREEN);
+            connStatus.setText("Connected");
+        }else{
+            connStatus.setText("Not Connected");
         }
-    checkStatus(s);
-    }//end authenticate
 
-    public void checkStatus(Socket s)throws IOException{
+        String status = sender.Main.serverStatus(s, pass);
+            console.appendText(status + "\n");
 
-        PrintWriter p = new PrintWriter(s.getOutputStream(), true);
-        BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
-
-        p.println("{\"method\":\"get_server_status\"}");
-        String response = bufRd.readLine();
-
-        //System.out.println(response +"\n");
-
-        Object obj = JSONValue.parse(response);
-        JSONObject jsonObject = (JSONObject) obj;
-
-        String status = (String) jsonObject.get("server_currently_status");
-
-        serverStatus.setText(status);
-        if (status.equals("Running")) {
-            serverStatus.setTextFill(Color.GREEN);
-        }
-        else serverStatus.setTextFill(Color.RED);
-
-    }//end checkStatus
-
-    public void sendRandom(){
-
+        s.close();
 
     }
+
+
+
 }//end class

@@ -6,9 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.*;
+import java.net.Socket;
+
+
 public class Main extends Application {
-
-
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -19,7 +21,32 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
-        launch(args);
+    public static String authentication(Socket s, String pass) throws Exception{
+
+        PrintStream p = new PrintStream(s.getOutputStream(), true);
+        BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+        p.println("{\"method\":\"authentication\",\"server_password\":\"" + pass + "\"}");
+
+        String response = bufRd.readLine();
+        //System.out.println(response);
+
+        p.println("");
+        response = bufRd.readLine();
+
+        return response;
     }
-}
+
+    public static String serverStatus(Socket s, String pass) throws Exception{
+
+        PrintWriter p = new PrintWriter(s.getOutputStream(), true);
+        BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+        p.println("{ \"method\":\"get_server_status\" }");
+        String response = bufRd.readLine();
+
+
+        return response;
+    }
+}//end main class
+
