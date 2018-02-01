@@ -59,7 +59,13 @@ public class Controller {
         }
 
         String status = sender.Main.serverStatus(s, pass);
-            console.appendText(status + "\n");
+        if (status.equals("Running")){
+            serverStatus.setTextFill(Color.GREEN);
+            serverStatus.setText("Running");
+        }else{
+            serverStatus.setTextFill(Color.RED);
+            serverStatus.setText("Paused");
+        }
 
         s.close();
 
