@@ -57,7 +57,7 @@ public class Main extends Application {
         return reply;
     }
 
-    public static String pauseServer(Socket s) throws Exception{
+    public static void pauseServer(Socket s) throws Exception{
 
         PrintWriter p = new PrintWriter(s.getOutputStream(), true);
         BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -65,16 +65,9 @@ public class Main extends Application {
         p.println("{ \"method\":\"pause_server\" }");
         String response = bufRd.readLine();
 
-        Object obj = JSONValue.parse(response);
-        JSONObject jsonObject = (JSONObject) obj;
-
-        String reply = (String) jsonObject.get("reply");
-
-        return reply;
-
     }// end pauseServer
 
-    public static String runServer(Socket s) throws Exception{
+    public static void runServer(Socket s) throws Exception{
 
         PrintWriter p = new PrintWriter(s.getOutputStream(), true);
         BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -82,13 +75,6 @@ public class Main extends Application {
         p.println("{ \"method\":\"run_server\" }");
         String response = bufRd.readLine();
 
-        Object obj = JSONValue.parse(response);
-        JSONObject jsonObject = (JSONObject) obj;
-
-        String reply = (String) jsonObject.get("reply");
-
-        return reply;
-
-    }
+    }//end runServer
 }//end main class
 
