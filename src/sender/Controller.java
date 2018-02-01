@@ -58,16 +58,75 @@ public class Controller {
             connStatus.setText("Not Connected");
         }
 
-        String status = sender.Main.serverStatus(s, pass);
+        String status = sender.Main.serverStatus(s);
         if (status.equals("Running")){
             serverStatus.setTextFill(Color.GREEN);
             serverStatus.setText("Running");
         }else{
             serverStatus.setTextFill(Color.RED);
             serverStatus.setText("Paused");
-        }
+        }//end if else block
 
         s.close();
+
+    }
+
+    public void PauseServer(ActionEvent e) throws Exception{
+
+        Socket s = new Socket(ipAddress.getText(), 63333);
+        String pass = passWord.getText();
+
+        String response = sender.Main.authentication(s, pass);
+        if (response.equals("SMS server connected")){
+            connStatus.setTextFill(Color.GREEN);
+            connStatus.setText("Connected");
+        }else{
+            connStatus.setText("Not Connected");
+        }//end if else block
+
+        response = sender.Main.pauseServer(s);
+        console.appendText(response + "\n");
+
+        String status = sender.Main.serverStatus(s);
+        if (status.equals("Running")){
+            serverStatus.setTextFill(Color.GREEN);
+            serverStatus.setText("Running");
+        }else{
+            serverStatus.setTextFill(Color.RED);
+            serverStatus.setText("Paused");
+        }//end if else block
+
+        s.close();
+
+    }// end pauseServer
+
+    public void runServer(ActionEvent e)throws Exception{
+
+        Socket s = new Socket(ipAddress.getText(), 63333);
+        String pass = passWord.getText();
+
+        String response = sender.Main.authentication(s, pass);
+        if (response.equals("SMS server connected")){
+            connStatus.setTextFill(Color.GREEN);
+            connStatus.setText("Connected");
+        }else{
+            connStatus.setText("Not Connected");
+        }//end if else block
+
+        response = sender.Main.runServer(s);
+        console.appendText(response + "\n");
+
+        String status = sender.Main.serverStatus(s);
+        if (status.equals("Running")){
+            serverStatus.setTextFill(Color.GREEN);
+            serverStatus.setText("Running");
+        }else{
+            serverStatus.setTextFill(Color.RED);
+            serverStatus.setText("Paused");
+        }//end if else block
+
+        s.close();
+
 
     }
 

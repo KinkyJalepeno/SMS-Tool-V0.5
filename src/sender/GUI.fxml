@@ -63,8 +63,8 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="runServer" layoutX="22.0" layoutY="475.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Run Server" />
-      <Button fx:id="pauseServer" layoutX="179.0" layoutY="475.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Pause Server" />
+      <Button fx:id="runServer" layoutX="22.0" layoutY="475.0" mnemonicParsing="false" onAction="#runServer" prefHeight="25.0" prefWidth="107.0" text="Run Server" />
+      <Button fx:id="pauseServer" layoutX="179.0" layoutY="475.0" mnemonicParsing="false" onAction="#PauseServer" prefHeight="25.0" prefWidth="107.0" text="Pause Server" />
       <TextField fx:id="mobNumber" layoutX="18.0" layoutY="65.0" prefHeight="17.0" prefWidth="107.0" promptText="Mobile Number" />
    </children>
 </AnchorPane>
