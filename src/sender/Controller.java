@@ -84,8 +84,7 @@ public class Controller {
             connStatus.setText("Not Connected");
         }//end if else block
 
-        response = sender.Main.pauseServer(s);
-        console.appendText(response + "\n");
+        sender.Main.pauseServer(s);
 
         String status = sender.Main.serverStatus(s);
         if (status.equals("Running")){
@@ -113,8 +112,7 @@ public class Controller {
             connStatus.setText("Not Connected");
         }//end if else block
 
-        response = sender.Main.runServer(s);
-        console.appendText(response + "\n");
+        sender.Main.runServer(s);
 
         String status = sender.Main.serverStatus(s);
         if (status.equals("Running")){
@@ -127,6 +125,12 @@ public class Controller {
 
         s.close();
 
+
+    }
+
+    public void clearConsole(ActionEvent e){
+
+        console.clear();
 
     }
 
