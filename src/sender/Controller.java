@@ -1,6 +1,5 @@
 package sender;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,9 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import sun.net.www.http.KeepAliveStream;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class Controller {
@@ -133,6 +132,34 @@ public class Controller {
         console.clear();
 
     }
+
+    public void randSend(ActionEvent e)throws Exception{
+
+        Socket s = new Socket(ipAddress.getText(), 63333);
+
+        String pass = passWord.getText();
+        String mobNum = mobNumber.getText();
+
+        sender.Main.authentication(s, pass);
+
+
+        String response = sender.Main.sendRand(s, mobNum);
+
+        Object obj = JSONValue.parse(response);
+        JSONObject jsonObject = (JSONObject) obj;
+
+        String result = (String) jsonObject.get("result:");
+        String number = (String) jsonObject.get("number:");
+        String cardAdd = (String) jsonObject.get("cardAdd:");
+        String portNum = (String) jsonObject.get("portNum:");
+        String reply = (String) jsonObject.get("reply:");
+
+        console.appendText(result + "\n" + "Number: " + number +"\nCard: " + cardAdd + "\nPort: " +
+            portNum + "\nResult: " + reply);
+
+        s.close();
+
+    }//end randSend
 
 
 

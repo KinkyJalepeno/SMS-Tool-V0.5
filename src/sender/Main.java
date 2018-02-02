@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+
 import java.io.*;
 import java.net.Socket;
 
@@ -29,9 +30,7 @@ public class Main extends Application {
         BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
         p.println("{\"method\":\"authentication\",\"server_password\":\"" + pass + "\"}");
-
         String response = bufRd.readLine();
-        //System.out.println(response);
 
         p.println("");
         response = bufRd.readLine();
@@ -76,5 +75,37 @@ public class Main extends Application {
         String response = bufRd.readLine();
 
     }//end runServer
+
+    public static String sendRand(Socket s, String mobNum) throws Exception{
+
+        PrintWriter p = new PrintWriter(s.getOutputStream(), true);
+        BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+        p.println("{\"number\":\"" + mobNum + "\", \"msg\":\"Random port test\", \"unicode\":\"5\"}");
+
+        String response = bufRd.readLine();
+        Object obj = JSONValue.parse(response);
+        JSONObject jsonObject = (JSONObject) obj;
+
+        String toController = (String) jsonObject.get("reply");
+        System.out.println(toController);
+
+        response = bufRd.readLine();
+        obj = JSONValue.parse(response);
+        jsonObject = (JSONObject) obj;
+
+        String number = (String) jsonObject.get("number");
+        String reply2 = (String) jsonObject.get("reply");
+        String cardAdd = (String) jsonObject.get("card_add");
+        String portNum = (String) jsonObject.get("port_num");
+
+        String collection = ("{\"result:\":\"" + toController + "\",\"number:\":\"" + number +
+                "\",\"reply:\":\""+ reply2 + "\",\"cardAdd:\":\""+ cardAdd + "\",\"portNum:\":\""+ portNum +"\"}");
+
+        return collection;
+
+    }//end setRand
+
+
 }//end main class
 
