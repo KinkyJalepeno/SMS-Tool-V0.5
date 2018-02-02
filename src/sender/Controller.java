@@ -140,22 +140,11 @@ public class Controller {
         String pass = passWord.getText();
         String mobNum = mobNumber.getText();
 
-        sender.Main.authentication(s, pass);
+        sender.Main.authentication(s, pass);//call authentication method
 
+        String response = sender.Main.sendRand(s, mobNum);//call random port send method
 
-        String response = sender.Main.sendRand(s, mobNum);
-
-        Object obj = JSONValue.parse(response);
-        JSONObject jsonObject = (JSONObject) obj;
-
-        String result = (String) jsonObject.get("result:");
-        String number = (String) jsonObject.get("number:");
-        String cardAdd = (String) jsonObject.get("cardAdd:");
-        String portNum = (String) jsonObject.get("portNum:");
-        String reply = (String) jsonObject.get("reply:");
-
-        console.appendText(result + "\n" + "Number: " + number +"\nCard: " + cardAdd + "\nPort: " +
-            portNum + "\nResult: " + reply);
+        console.appendText(response);
 
         s.close();
 

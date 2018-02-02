@@ -84,11 +84,11 @@ public class Main extends Application {
         p.println("{\"number\":\"" + mobNum + "\", \"msg\":\"Random port test\", \"unicode\":\"5\"}");
 
         String response = bufRd.readLine();
+        System.out.println(response);
         Object obj = JSONValue.parse(response);
         JSONObject jsonObject = (JSONObject) obj;
 
-        String toController = (String) jsonObject.get("reply");
-        System.out.println(toController);
+        String getReply = (String) jsonObject.get("reply");
 
         response = bufRd.readLine();
         obj = JSONValue.parse(response);
@@ -99,13 +99,11 @@ public class Main extends Application {
         String cardAdd = (String) jsonObject.get("card_add");
         String portNum = (String) jsonObject.get("port_num");
 
-        String collection = ("{\"result:\":\"" + toController + "\",\"number:\":\"" + number +
-                "\",\"reply:\":\""+ reply2 + "\",\"cardAdd:\":\""+ cardAdd + "\",\"portNum:\":\""+ portNum +"\"}");
+        String collection = ("Status: " + getReply + "\nNumber: " + number + "\nCard: " + cardAdd + "\nPort: " +
+            portNum + "\nResult: " + reply2);
 
         return collection;
 
     }//end setRand
-
-
 }//end main class
 
