@@ -45,20 +45,18 @@ public class Controller {
 
     public void authentication(ActionEvent e) throws Exception {
 
-        Socket s = new Socket(ipAddress.getText(), 63333);
-        String pass = passWord.getText();
+        //Socket s = new Socket(ipAddress.getText(), 63333);
+        //String pass = passWord.getText();
 
-        String response = sender.Authenticator.authenticate(s, pass);
+        boolean response = sender.Senders.authenticate(passWord.getText(), ipAddress.getText());
 
-        if (response.equals("SMS server connected")){
+        if(response == true){
             connStatus.setTextFill(Color.GREEN);
             connStatus.setText("Connected");
-        }else{
-            connStatus.setText("Not Connected");
-        }
+        }//end if block
 
-        String status = sender.ServerStatus.serverStatus(s);
-        if (status.equals("Running")){
+        boolean status = sender.Senders.serverStatus();
+        if (status == true){
             serverStatus.setTextFill(Color.GREEN);
             serverStatus.setText("Running");
         }else{
@@ -66,45 +64,40 @@ public class Controller {
             serverStatus.setText("Paused");
         }//end if else block
 
-        s.close();
+
 
     }
 
     public void randSend(ActionEvent e)throws Exception{
 
-        Socket s = new Socket(ipAddress.getText(), 63333);
+        String response = sender.Senders.sendRand(mobNumber.getText());//call random port send method
 
-        String pass = passWord.getText();
-        String mobNum = mobNumber.getText();
-
-        sender.Authenticator.authenticate(s, pass);//call authentication method
-
-        String response = sender.Senders.sendRand(s, mobNum);//call random port send method
-
-        console.appendText(response);
-
-        s.close();
+        console.appendText(response +"\n\n");
 
     }//end randSend
 
     public void cardPort(ActionEvent e)throws Exception{
 
-        Socket s = new Socket(ipAddress.getText(), 63333);
+        String response = sender.Senders.cardPort(mobNumber.getText(), card.getText(), port.getText());
 
-        String pass = passWord.getText();
-        String mobNum = mobNumber.getText();
-        String cardAdd = card.getText();
-        String portNum = port.getText();
+        console.appendText(response + "\n\n");
 
-        sender.Authenticator.authenticate(s, pass);//call authentication method
+    }//end card/port method
 
-        String response = sender.Senders.cardPort(s, mobNum, cardAdd, portNum);//call random port send method
+    public void allCard(ActionEvent e)throws Exception{
 
-        console.appendText(response + "\n");
+        for(int i = 1; i < 5; i++) {
+            String response = sender.Senders.allCard(mobNumber.getText(), card2.getText(), i);
+            console.appendText(response + "\n");
+        }
 
-        s.close();
+        for(int i = 1; i < 5; i++) {
+            String response = sender.Senders.allCard2();
+            console.appendText(response + "\n");
+        }
+    }//end allCard method
 
-    }
+
 
 //    public void PauseServer(ActionEvent e) throws Exception{
 //
