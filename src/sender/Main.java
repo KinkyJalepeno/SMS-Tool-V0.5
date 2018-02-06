@@ -24,20 +24,6 @@ public class Main extends Application {
     }
 
 
-    public static String authentication(Socket s, String pass) throws Exception{
-
-        PrintStream p = new PrintStream(s.getOutputStream(), true);
-        BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
-
-        p.println("{\"method\":\"authentication\",\"server_password\":\"" + pass + "\"}");
-        String response = bufRd.readLine();
-
-        p.println("");
-        response = bufRd.readLine();
-
-        return response;
-    }
-
     public static String serverStatus(Socket s) throws Exception{
 
         PrintWriter p = new PrintWriter(s.getOutputStream(), true);

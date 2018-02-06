@@ -48,8 +48,8 @@ public class Controller {
         Socket s = new Socket(ipAddress.getText(), 63333);
         String pass = passWord.getText();
 
+        String response = sender.Authenticator.authenticate(s, pass);
 
-        String response = sender.Main.authentication(s, pass);
         if (response.equals("SMS server connected")){
             connStatus.setTextFill(Color.GREEN);
             connStatus.setText("Connected");
@@ -57,7 +57,7 @@ public class Controller {
             connStatus.setText("Not Connected");
         }
 
-        String status = sender.Main.serverStatus(s);
+        String status = sender.ServerStatus.serverStatus(s);
         if (status.equals("Running")){
             serverStatus.setTextFill(Color.GREEN);
             serverStatus.setText("Running");
@@ -67,69 +67,6 @@ public class Controller {
         }//end if else block
 
         s.close();
-
-    }
-
-    public void PauseServer(ActionEvent e) throws Exception{
-
-        Socket s = new Socket(ipAddress.getText(), 63333);
-        String pass = passWord.getText();
-
-        String response = sender.Main.authentication(s, pass);
-        if (response.equals("SMS server connected")){
-            connStatus.setTextFill(Color.GREEN);
-            connStatus.setText("Connected");
-        }else{
-            connStatus.setText("Not Connected");
-        }//end if else block
-
-        sender.Main.pauseServer(s);
-
-        String status = sender.Main.serverStatus(s);
-        if (status.equals("Running")){
-            serverStatus.setTextFill(Color.GREEN);
-            serverStatus.setText("Running");
-        }else{
-            serverStatus.setTextFill(Color.RED);
-            serverStatus.setText("Paused");
-        }//end if else block
-
-        s.close();
-
-    }// end pauseServer
-
-    public void runServer(ActionEvent e)throws Exception{
-
-        Socket s = new Socket(ipAddress.getText(), 63333);
-        String pass = passWord.getText();
-
-        String response = sender.Main.authentication(s, pass);
-        if (response.equals("SMS server connected")){
-            connStatus.setTextFill(Color.GREEN);
-            connStatus.setText("Connected");
-        }else{
-            connStatus.setText("Not Connected");
-        }//end if else block
-
-        sender.Main.runServer(s);
-
-        String status = sender.Main.serverStatus(s);
-        if (status.equals("Running")){
-            serverStatus.setTextFill(Color.GREEN);
-            serverStatus.setText("Running");
-        }else{
-            serverStatus.setTextFill(Color.RED);
-            serverStatus.setText("Paused");
-        }//end if else block
-
-        s.close();
-
-
-    }
-
-    public void clearConsole(ActionEvent e){
-
-        console.clear();
 
     }
 
@@ -140,15 +77,98 @@ public class Controller {
         String pass = passWord.getText();
         String mobNum = mobNumber.getText();
 
-        sender.Main.authentication(s, pass);//call authentication method
+        sender.Authenticator.authenticate(s, pass);//call authentication method
 
-        String response = sender.Main.sendRand(s, mobNum);//call random port send method
+        String response = sender.Senders.sendRand(s, mobNum);//call random port send method
 
         console.appendText(response);
 
         s.close();
 
     }//end randSend
+
+    public void cardPort(ActionEvent e)throws Exception{
+
+        Socket s = new Socket(ipAddress.getText(), 63333);
+
+        String pass = passWord.getText();
+        String mobNum = mobNumber.getText();
+        String cardAdd = card.getText();
+        String portNum = port.getText();
+
+        sender.Authenticator.authenticate(s, pass);//call authentication method
+
+        String response = sender.Senders.cardPort(s, mobNum, cardAdd, portNum);//call random port send method
+
+        console.appendText(response + "\n");
+
+        s.close();
+
+    }
+
+//    public void PauseServer(ActionEvent e) throws Exception{
+//
+//        Socket s = new Socket(ipAddress.getText(), 63333);
+//        String pass = passWord.getText();
+//
+//        String response = sender.Main.authentication(s, pass);
+//        if (response.equals("SMS server connected")){
+//            connStatus.setTextFill(Color.GREEN);
+//            connStatus.setText("Connected");
+//        }else{
+//            connStatus.setText("Not Connected");
+//        }//end if else block
+//
+//        sender.Main.pauseServer(s);
+//
+//        String status = sender.Main.serverStatus(s);
+//        if (status.equals("Running")){
+//            serverStatus.setTextFill(Color.GREEN);
+//            serverStatus.setText("Running");
+//        }else{
+//            serverStatus.setTextFill(Color.RED);
+//            serverStatus.setText("Paused");
+//        }//end if else block
+//
+//        s.close();
+//
+//    }// end pauseServer
+//
+//    public void runServer(ActionEvent e)throws Exception{
+//
+//        Socket s = new Socket(ipAddress.getText(), 63333);
+//        String pass = passWord.getText();
+//
+//        String response = sender.Main.authentication(s, pass);
+//        if (response.equals("SMS server connected")){
+//            connStatus.setTextFill(Color.GREEN);
+//            connStatus.setText("Connected");
+//        }else{
+//            connStatus.setText("Not Connected");
+//        }//end if else block
+//
+//        sender.Main.runServer(s);
+//
+//        String status = sender.Main.serverStatus(s);
+//        if (status.equals("Running")){
+//            serverStatus.setTextFill(Color.GREEN);
+//            serverStatus.setText("Running");
+//        }else{
+//            serverStatus.setTextFill(Color.RED);
+//            serverStatus.setText("Paused");
+//        }//end if else block
+//
+//        s.close();
+//
+//
+//    }
+//
+    public void clearConsole(ActionEvent e){
+
+        console.clear();
+    }
+
+
 
 
 

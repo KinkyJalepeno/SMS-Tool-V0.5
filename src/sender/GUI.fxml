@@ -27,8 +27,9 @@
       <Button fx:id="connect" layoutX="183.0" layoutY="65.0" mnemonicParsing="false" onAction="#authentication" prefHeight="25.0" prefWidth="107.0" text="Connect" />
       <TextField fx:id="ipAddress" layoutX="18.0" layoutY="18.0" prefHeight="17.0" prefWidth="107.0" promptText="IP Address" />
       <TextField fx:id="passWord" layoutX="183.0" layoutY="18.0" prefHeight="25.0" prefWidth="107.0" promptText="Password" />
+      <TextField fx:id="mobNumber" layoutX="18.0" layoutY="65.0" prefHeight="17.0" prefWidth="107.0" promptText="Mobile Number" />
       <Button fx:id="randPort" layoutX="20.0" layoutY="167.0" mnemonicParsing="false" onAction="#randSend" prefHeight="25.0" prefWidth="107.0" text="Random Port" />
-      <Button fx:id="cardPort" layoutX="20.0" layoutY="207.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Card and Port" />
+      <Button fx:id="cardPort" layoutX="20.0" layoutY="207.0" mnemonicParsing="false" onAction="#cardPort" prefHeight="25.0" prefWidth="107.0" text="Card and Port" />
       <Button fx:id="allPorts" layoutX="20.0" layoutY="246.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="All Ports of Card" />
       <Button fx:id="allCards" layoutX="20.0" layoutY="285.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="All Cards/Ports" />
       <Label layoutX="134.0" layoutY="211.0" prefHeight="17.0" prefWidth="52.0" text="Card" />
@@ -63,8 +64,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="runServer" layoutX="22.0" layoutY="475.0" mnemonicParsing="false" onAction="#runServer" prefHeight="25.0" prefWidth="107.0" text="Run Server" />
-      <Button fx:id="pauseServer" layoutX="179.0" layoutY="475.0" mnemonicParsing="false" onAction="#PauseServer" prefHeight="25.0" prefWidth="107.0" text="Pause Server" />
-      <TextField fx:id="mobNumber" layoutX="18.0" layoutY="65.0" prefHeight="17.0" prefWidth="107.0" promptText="Mobile Number" />
+      <Button fx:id="runServer" layoutX="22.0" layoutY="475.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Run Server" />
+      <Button fx:id="pauseServer" layoutX="179.0" layoutY="475.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Pause Server" />
    </children>
 </AnchorPane>
