@@ -128,12 +128,44 @@ public class Senders {
         return collection;
     }
 
-    public static String allCard(String mobNumber, String card, int i) {
-        return card;
+    public static String allCard(String mobNumber, String card, int i)throws IOException {
+
+        p = new PrintWriter(s.getOutputStream(), true);
+        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+        p.println("{\"number\": \"" + mobNumber + "\",\"msg\":\"" + card + " # " + i +
+                "\",\"unicode\":\"2\",\"send_to_sim\":\"" + card + "#" + i + "\"}");
+
+        response = bufRd.readLine();
+        //System.out.println(response);
+        obj = JSONValue.parse(response);
+        jsonObject = (JSONObject) obj;
+
+        String part1 = (String) jsonObject.get("send_to_sim");
+        String part2 = (String) jsonObject.get("reply");
+
+        String collection = ("Send to sim: " + part1 + " Status: " + part2 + "\n");
+
+        return collection;
     }
 
-    public static String allCard2() {
-        return null;
+    public static String allCard2()throws IOException {
+
+        p = new PrintWriter(s.getOutputStream(), true);
+        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+        response = bufRd.readLine();
+        //System.out.println(response);
+        obj = JSONValue.parse(response);
+        jsonObject = (JSONObject) obj;
+
+        String part1 = (String) jsonObject.get("send_to_sim");
+        String part2 = (String) jsonObject.get("reply");
+
+        String collection = ("Send to sim: " + part1 + " Status: " + part2 + "\n");
+
+        return collection;
+
     }
 
 
