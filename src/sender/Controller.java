@@ -76,8 +76,10 @@ public class Controller {
     public void cardPort(ActionEvent e)throws Exception{
 
         String response = sender.Senders.cardPort(mobNumber.getText(), card.getText(), port.getText());
+        console.appendText(response + "\n");
 
-        console.appendText(response + "\n\n");
+        response = sender.Senders.cardPort2();
+        console.appendText(response + "\n");
 
     }//end card/port method
 

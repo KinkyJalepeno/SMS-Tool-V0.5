@@ -56,15 +56,15 @@ public class Senders {
 
     public static String sendRand(String mobNumber) throws IOException{
 
-        PrintWriter p = new PrintWriter(s.getOutputStream(), true);
-        BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+        p = new PrintWriter(s.getOutputStream(), true);
+        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
         p.println("{\"number\":\"" + mobNumber + "\", \"msg\":\"Random port test\", \"unicode\":\"5\"}");
 
-        String response = bufRd.readLine();
+        response = bufRd.readLine();
         System.out.println(response);
-        Object obj = JSONValue.parse(response);
-        JSONObject jsonObject = (JSONObject) obj;
+        obj = JSONValue.parse(response);
+        jsonObject = (JSONObject) obj;
 
         String getReply = (String) jsonObject.get("reply");
 
@@ -83,8 +83,49 @@ public class Senders {
         return collection;
     }
 
-    public static String cardPort(String mobNumber, String card, String port) {
-        return card;
+    public static String cardPort(String mobNumber, String card, String port) throws IOException{
+
+        p = new PrintWriter(s.getOutputStream(), true);
+        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+        p.println("{\"number\": \"" + mobNumber + "\",\"msg\":\"" + card +"#" + port +
+                "\",\"unicode\":\"2\",\"send_to_sim\":\"" + card + "#" + port + "\"}");
+
+        response = bufRd.readLine();
+        //System.out.println(response);
+        obj = JSONValue.parse(response);
+        jsonObject = (JSONObject) obj;
+
+        String part1 = (String) jsonObject.get("send_to_sim");
+        String part2 = (String) jsonObject.get("reply");
+
+        String collection = ("Send to sim: " + part1 + " \nStatus: " + part2 + "\n");
+
+        return collection;
+    }//end card/port part 1
+
+    public static String cardPort2()throws IOException {
+
+        //p = new PrintWriter(s.getOutputStream(), true);
+        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+        //p.println("{\"number\": \"" + mobNumber + "\",\"msg\":\"" + card +"#" + port +
+        //       "\",\"unicode\":\"2\",\"send_to_sim\":\"" + card + "#" + port + "\"}");
+
+        response = bufRd.readLine();
+        //System.out.println(response);
+        obj = JSONValue.parse(response);
+        jsonObject = (JSONObject) obj;
+
+        String part1 = (String) jsonObject.get("number");
+        String part2 = (String) jsonObject.get("reply");
+        if(part2.equals("proceeding")){
+            String collection = ("Please check sims/port - SMS queued");
+            return collection;
+        }
+
+        String collection = ("Number: " + part1 + " \nStatus: " + part2 + "\n");
+        return collection;
     }
 
     public static String allCard(String mobNumber, String card, int i) {
@@ -94,4 +135,6 @@ public class Senders {
     public static String allCard2() {
         return null;
     }
+
+
 }
