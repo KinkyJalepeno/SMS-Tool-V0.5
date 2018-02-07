@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SMSenderFX:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SMSenderFX_jar</output-path>
+    <root id="archive" name="SMSenderFX.jar">
+      <element id="module-output" name="SMSenderFX" />
+      <element id="extracted-dir" path="$USER_HOME$/Dropbox/Java Projects/Libraries/json-simple-1.1.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -52,6 +52,8 @@ public class Controller {
         if(response == true){
             connStatus.setTextFill(Color.GREEN);
             connStatus.setText("Connected");
+            //console.clear();
+            console.appendText("Connected........... \n");
         }//end if block
 
         boolean status = sender.Senders.serverStatus();
@@ -196,8 +198,5 @@ public class Controller {
         console.appendText(response + "\n");
 
     }
-
-
-
 
 }//end class

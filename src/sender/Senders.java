@@ -67,8 +67,9 @@ public class Senders {
         jsonObject = (JSONObject) obj;
 
         String getReply = (String) jsonObject.get("reply");
-
         response = bufRd.readLine();
+
+        System.out.println(response);
         obj = JSONValue.parse(response);
         jsonObject = (JSONObject) obj;
 
@@ -92,7 +93,6 @@ public class Senders {
                 "\",\"unicode\":\"2\",\"send_to_sim\":\"" + card + "#" + port + "\"}");
 
         response = bufRd.readLine();
-        //System.out.println(response);
         obj = JSONValue.parse(response);
         jsonObject = (JSONObject) obj;
 
@@ -106,23 +106,15 @@ public class Senders {
 
     public static String cardPort2()throws IOException {
 
-        //p = new PrintWriter(s.getOutputStream(), true);
+
         bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
-        //p.println("{\"number\": \"" + mobNumber + "\",\"msg\":\"" + card +"#" + port +
-        //       "\",\"unicode\":\"2\",\"send_to_sim\":\"" + card + "#" + port + "\"}");
-
         response = bufRd.readLine();
-        //System.out.println(response);
         obj = JSONValue.parse(response);
         jsonObject = (JSONObject) obj;
 
         String part1 = (String) jsonObject.get("number");
         String part2 = (String) jsonObject.get("reply");
-        if(part2.equals("proceeding")){
-            String collection = ("Please check sims/port - SMS queued");
-            return collection;
-        }
 
         String collection = ("Number: " + part1 + " \nStatus: " + part2 + "\n");
         return collection;
@@ -137,16 +129,11 @@ public class Senders {
                 "\",\"unicode\":\"2\",\"send_to_sim\":\"" + card + "#" + i + "\"}");
 
         response = bufRd.readLine();
-        //System.out.println(response);
         obj = JSONValue.parse(response);
         jsonObject = (JSONObject) obj;
 
         String part1 = (String) jsonObject.get("send_to_sim");
         String part2 = (String) jsonObject.get("reply");
-        if(part2.equals("proceeding")){
-            String collection = "Messages have been queued, check sims";
-            return collection;
-        }
 
         String collection = ("Send to sim: " + part1 + " Status: " + part2 + "\n");
 
@@ -155,11 +142,10 @@ public class Senders {
 
     public static String allCard2()throws IOException {
 
-        p = new PrintWriter(s.getOutputStream(), true);
         bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
         response = bufRd.readLine();
-        //System.out.println(response);
+
         obj = JSONValue.parse(response);
         jsonObject = (JSONObject) obj;
 
@@ -171,7 +157,6 @@ public class Senders {
         return collection;
 
     }
-
 
     public static String allPorts(String mobNumber, int card, int port) throws IOException{
 
@@ -189,7 +174,11 @@ public class Senders {
     }//end allPorts method
 
     public static String allPorts2()throws IOException {
+
+        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
         String response = bufRd.readLine();
+
         Object obj = JSONValue.parse(response);
         JSONObject jsonObject = (JSONObject) obj;
 
