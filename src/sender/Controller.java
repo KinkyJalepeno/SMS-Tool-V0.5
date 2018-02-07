@@ -31,7 +31,6 @@ public class Controller {
     @FXML private Button runServer;
     @FXML private Button pauseServer;
 
-
     @FXML private TextField ipAddress;
     @FXML private TextField passWord;
     @FXML private TextField card;
