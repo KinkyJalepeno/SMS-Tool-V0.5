@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -75,6 +76,12 @@ public class Controller {
 
     public void cardPort(ActionEvent e)throws Exception{
 
+        int cardCheck = Integer.parseInt(card.getText());
+            if(cardCheck < 21 || cardCheck >28){
+                console.appendText("You must enter a card address from 21 - 28 \n");
+                return;
+        }
+
         String response = sender.Senders.cardPort(mobNumber.getText(), card.getText(), port.getText());
         console.appendText(response + "\n");
 
@@ -84,6 +91,12 @@ public class Controller {
     }//end card/port method
 
     public void allCard(ActionEvent e)throws Exception{
+
+        int cardCheck = Integer.parseInt(card2.getText());
+        if(cardCheck < 21 || cardCheck >28){
+            console.appendText("You must enter a card address from 21 - 28 \n");
+            return;
+        }
 
         for(int i = 1; i < 5; i++) {
             String response = sender.Senders.allCard(mobNumber.getText(), card2.getText(), i);
@@ -97,6 +110,12 @@ public class Controller {
     }//end allCard method
 
     public void allPorts(ActionEvent e)throws Exception {
+
+        int cardCheck = Integer.parseInt(numCards.getText());
+        if(cardCheck < 1 || cardCheck >8){
+            console.appendText("You must enter a card number from 1 - 8 \n");
+            return;
+        }
 
         int totalCards = Integer.parseInt(numCards.getText());
         totalCards = totalCards + 20;
@@ -119,70 +138,64 @@ public class Controller {
         console.appendText("\n");
     }//end allPorts method
 
-
-
-//    public void PauseServer(ActionEvent e) throws Exception{
-//
-//        Socket s = new Socket(ipAddress.getText(), 63333);
-//        String pass = passWord.getText();
-//
-//        String response = sender.Main.authentication(s, pass);
-//        if (response.equals("SMS server connected")){
-//            connStatus.setTextFill(Color.GREEN);
-//            connStatus.setText("Connected");
-//        }else{
-//            connStatus.setText("Not Connected");
-//        }//end if else block
-//
-//        sender.Main.pauseServer(s);
-//
-//        String status = sender.Main.serverStatus(s);
-//        if (status.equals("Running")){
-//            serverStatus.setTextFill(Color.GREEN);
-//            serverStatus.setText("Running");
-//        }else{
-//            serverStatus.setTextFill(Color.RED);
-//            serverStatus.setText("Paused");
-//        }//end if else block
-//
-//        s.close();
-//
-//    }// end pauseServer
-//
-//    public void runServer(ActionEvent e)throws Exception{
-//
-//        Socket s = new Socket(ipAddress.getText(), 63333);
-//        String pass = passWord.getText();
-//
-//        String response = sender.Main.authentication(s, pass);
-//        if (response.equals("SMS server connected")){
-//            connStatus.setTextFill(Color.GREEN);
-//            connStatus.setText("Connected");
-//        }else{
-//            connStatus.setText("Not Connected");
-//        }//end if else block
-//
-//        sender.Main.runServer(s);
-//
-//        String status = sender.Main.serverStatus(s);
-//        if (status.equals("Running")){
-//            serverStatus.setTextFill(Color.GREEN);
-//            serverStatus.setText("Running");
-//        }else{
-//            serverStatus.setTextFill(Color.RED);
-//            serverStatus.setText("Paused");
-//        }//end if else block
-//
-//        s.close();
-//
-//
-//    }
-//
     public void clearConsole(ActionEvent e){
 
         console.clear();
     }
 
+    public void pauseServer(ActionEvent e)throws Exception{
+
+        String response = sender.Senders.pauseServer();
+        if(response.equals("ok")) {
+            serverStatus.setTextFill(Color.RED);
+            serverStatus.setText("Paused");
+        }
+
+    }//end pause Server
+
+    public void runServer(ActionEvent e)throws Exception{
+
+        String response = sender.Senders.runServer();
+        if(response.equals("ok")) {
+            serverStatus.setTextFill(Color.GREEN);
+            serverStatus.setText("Running");
+        }
+
+    }//end pause Server
+
+    public void queryGeneral(ActionEvent e)throws Exception{
+
+        String response = sender.Senders.queryGenQue();
+        console.appendText(response + "\n");
+
+    }//end query general queue
+
+    public void queryMaster(ActionEvent e)throws Exception{
+
+        String response = sender.Senders.queryMasQue();
+        console.appendText(response + "\n");
+
+    }//end query master queue
+
+    public void flushGeneral(ActionEvent e)throws Exception{
+
+        String response = sender.Senders.flushGenQue();
+        console.appendText(response + "\n");
+
+        response = sender.Senders.queryGenQue();
+        console.appendText(response + "\n");
+
+    }
+
+    public void flushMaster(ActionEvent e)throws Exception{
+
+        String response = sender.Senders.flushMasQue();
+        console.appendText(response + "\n");
+
+        response = sender.Senders.queryMasQue();
+        console.appendText(response + "\n");
+
+    }
 
 
 

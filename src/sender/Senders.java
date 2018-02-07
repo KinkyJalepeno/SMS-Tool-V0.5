@@ -143,6 +143,10 @@ public class Senders {
 
         String part1 = (String) jsonObject.get("send_to_sim");
         String part2 = (String) jsonObject.get("reply");
+        if(part2.equals("proceeding")){
+            String collection = "Messages have been queued, check sims";
+            return collection;
+        }
 
         String collection = ("Send to sim: " + part1 + " Status: " + part2 + "\n");
 
@@ -195,4 +199,93 @@ public class Senders {
         String collection = ("Send to sim: " + part1 + " Status: " + part2);
         return collection;
     }//end allPorts2 method
+
+    public static String pauseServer()throws IOException {
+
+        p = new PrintWriter(s.getOutputStream(), true);
+        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+        p.println("{\"method\":\"pause_server\"}");
+        response = bufRd.readLine();
+
+        obj = JSONValue.parse(response);
+        jsonObject = (JSONObject) obj;
+
+        String status = (String) jsonObject.get("reply");
+        return status;
+
+    }//end pause server
+
+    public static String runServer()throws IOException {
+
+        p = new PrintWriter(s.getOutputStream(), true);
+        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+        p.println("{\"method\":\"run_server\"}");
+        response = bufRd.readLine();
+
+        obj = JSONValue.parse(response);
+        jsonObject = (JSONObject) obj;
+
+        String status = (String) jsonObject.get("reply");
+        return status;
+
+    }//end
+
+    public static String queryGenQue()throws IOException {
+
+        p = new PrintWriter(s.getOutputStream(), true);
+        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+        p.println("{\"method\":\"get_q_size\"}");
+        String response = bufRd.readLine();
+        Object obj = JSONValue.parse(response);
+        JSONObject jsonObject = (JSONObject) obj;
+
+        long gen = (long) jsonObject.get("total_len");
+        String collection = ("Number of messages in general queue: " + gen);
+
+        return collection;
+    }//end general queue check
+
+    public static String queryMasQue()throws IOException {
+
+        p = new PrintWriter(s.getOutputStream(), true);
+        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+        p.println("{\"method\":\"get_q_size\",\"queue_type\":\"master\"}");
+        String response = bufRd.readLine();
+        Object obj = JSONValue.parse(response);
+        JSONObject jsonObject = (JSONObject) obj;
+
+        long gen = (long) jsonObject.get("total_len");
+        String collection = ("Number of messages in master queue: " + gen);
+
+        return collection;
+    }
+
+    public static String flushGenQue()throws IOException {
+
+        p.println("{\"method\":\"delete_queue\"}");
+        response = bufRd.readLine();
+        obj = JSONValue.parse(response);
+        jsonObject = (JSONObject) obj;
+
+        String reply = (String) jsonObject.get("reply");
+        String collection = ("Reply: " + reply + ", general queue flushed \n");
+        return collection;
+    }
+
+    public static String flushMasQue()throws IOException {
+
+        p.println("{ \"method\":\"delete_queue\",\"queue_type\":\"master\" }");
+        response = bufRd.readLine();
+        obj = JSONValue.parse(response);
+        jsonObject = (JSONObject) obj;
+
+        String reply = (String) jsonObject.get("reply");
+        String collection = ("Reply: " + reply + ", master queue flushed \n");
+        return collection;
+    }
+
 }//end class
