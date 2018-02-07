@@ -67,6 +67,6 @@
       <Button fx:id="runServer" layoutX="22.0" layoutY="475.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Run Server" />
       <Button fx:id="pauseServer" layoutX="179.0" layoutY="475.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Pause Server" />
       <Label layoutX="135.0" layoutY="289.0" prefHeight="17.0" prefWidth="107.0" text="Number of Cards" />
-      <TextField fx:id="numcards" layoutX="255.0" layoutY="285.0" prefHeight="25.0" prefWidth="31.0" />
+      <TextField fx:id="numCards" layoutX="255.0" layoutY="285.0" prefHeight="25.0" prefWidth="31.0" />
    </children>
 </AnchorPane>

@@ -102,7 +102,7 @@ public class Senders {
         String collection = ("Send to sim: " + part1 + " \nStatus: " + part2 + "\n");
 
         return collection;
-    }//end card/port part 1
+    }
 
     public static String cardPort2()throws IOException {
 
@@ -169,4 +169,30 @@ public class Senders {
     }
 
 
-}
+    public static String allPorts(String mobNumber, int card, int port) throws IOException{
+
+        p.println("{\"number\": \"" + mobNumber + "\",\"msg\":\"" + card + " # " + port +
+                "\",\"unicode\":\"2\",\"send_to_sim\":\"" + card + "#" + port + "\"}");
+        String response = bufRd.readLine();
+        Object obj = JSONValue.parse(response);
+        JSONObject jsonObject = (JSONObject) obj;
+
+        String part1 = (String) jsonObject.get("send_to_sim");
+        String part2 = (String) jsonObject.get("reply");
+
+        String collection = ("Send to sim: " + part1 + " Status: " + part2);
+        return collection;
+    }//end allPorts method
+
+    public static String allPorts2()throws IOException {
+        String response = bufRd.readLine();
+        Object obj = JSONValue.parse(response);
+        JSONObject jsonObject = (JSONObject) obj;
+
+        String part1 = (String) jsonObject.get("send_to_sim");
+        String part2 = (String) jsonObject.get("reply");
+
+        String collection = ("Send to sim: " + part1 + " Status: " + part2);
+        return collection;
+    }//end allPorts2 method
+}//end class

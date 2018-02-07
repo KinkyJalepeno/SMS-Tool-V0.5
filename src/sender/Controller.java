@@ -37,6 +37,7 @@ public class Controller {
     @FXML private TextField card2;
     @FXML private TextField port;
     @FXML private TextField mobNumber;
+    @FXML private TextField numCards;
 
     @FXML private TextArea console;
 
@@ -67,8 +68,7 @@ public class Controller {
 
     public void randSend(ActionEvent e)throws Exception{
 
-        String response = sender.Senders.sendRand(mobNumber.getText());//call random port send method
-
+        String response = sender.Senders.sendRand(mobNumber.getText());
         console.appendText(response +"\n\n");
 
     }//end randSend
@@ -96,10 +96,28 @@ public class Controller {
         }
     }//end allCard method
 
-    public void allPorts(ActionEvent e)throws Exception{
+    public void allPorts(ActionEvent e)throws Exception {
 
-        //sender.Senders.allPorts(mobNumber.getText(), numOfCards.getText());
-    }
+        int totalCards = Integer.parseInt(numCards.getText());
+        totalCards = totalCards + 20;
+        //System.out.println(totalCards + "\n");
+        for (int i = 21; i <= totalCards; i++) {
+            for (int j = 1; j < 5; j++) {
+                //System.out.println("card: " + i + " port: " + j + "\n");
+                String response = sender.Senders.allPorts(mobNumber.getText(), i, j);
+               console.appendText(response + "\n");
+            }//end inner port loop
+        }//end outer card loop
+        console.appendText("\n");
+
+        for (int i = 21; i <= totalCards; i++) {
+            for (int j = 1; j < 5; j++) {
+                String response = sender.Senders.allPorts2();
+                console.appendText(response + "\n");
+            }//end inner port loop
+        }//end outer card loop
+        console.appendText("\n");
+    }//end allPorts method
 
 
 
