@@ -45,9 +45,6 @@ public class Controller {
 
     public void authentication(ActionEvent e) throws Exception {
 
-        //Socket s = new Socket(ipAddress.getText(), 63333);
-        //String pass = passWord.getText();
-
         boolean response = sender.Senders.authenticate(passWord.getText(), ipAddress.getText());
 
         if(response == true){
@@ -96,6 +93,11 @@ public class Controller {
             console.appendText(response + "\n");
         }
     }//end allCard method
+
+    public void allPorts(ActionEvent e)throws Exception{
+
+        //sender.Senders.allPorts(mobNumber.getText(), numOfCards.getText());
+    }
 
 
 
