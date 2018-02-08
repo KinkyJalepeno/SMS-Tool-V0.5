@@ -71,15 +71,15 @@ public class Controller {
                 console.appendText("You must enter a card address from 21 - 28 \n");
                 return;
         }
+        int portCheck = Integer.parseInt(port.getText());
+        if(portCheck < 1 || portCheck >4){
+            console.appendText("You must enter a port number from 1 - 4 \n");
+            return;
+        }
+
         (new Thread(new SpecifyCardPort(mobNumber.getText(), s, console, card.getText(), port.getText()))).start();
 
         (new Thread(new CollectResponses(s, console))).start();
-
-//        String response = sender.Senders.cardPort(mobNumber.getText(), card.getText(), port.getText());
-//        console.appendText(response + "\n");
-//
-//        response = sender.Senders.cardPort2();
-//        console.appendText(response + "\n");
 
     }//end card/port method
 
@@ -89,108 +89,101 @@ public class Controller {
         if(cardCheck < 21 || cardCheck >28){
             console.appendText("You must enter a card address from 21 - 28 \n");
             return;
-        }
+        }//end cardCheck
 
-        for(int i = 1; i < 5; i++) {
-            String response = sender.Senders.allCard(mobNumber.getText(), card2.getText(), i);
-            console.appendText(response + "\n");
-        }
+        (new Thread(new AllCard(s, card2.getText(), console, mobNumber.getText()))).start();
 
-        for(int i = 1; i < 5; i++) {
-            String response = sender.Senders.allCard2();
-            console.appendText(response + "\n");
-        }
     }//end allCard method
 
-    public void allPorts(ActionEvent e)throws Exception {
-
-        int cardCheck = Integer.parseInt(numCards.getText());
-        if(cardCheck < 1 || cardCheck >8){
-            console.appendText("You must enter a card number from 1 - 8 \n");
-            return;
-        }
-
-        int totalCards = Integer.parseInt(numCards.getText());
-        totalCards = totalCards + 20;
-        //System.out.println(totalCards + "\n");
-        for (int i = 21; i <= totalCards; i++) {
-            for (int j = 1; j < 5; j++) {
-                //System.out.println("card: " + i + " port: " + j + "\n");
-                String response = sender.Senders.allPorts(mobNumber.getText(), i, j);
-               console.appendText(response + "\n");
-            }//end inner port loop
-        }//end outer card loop
-        console.appendText("\n");
-
-        for (int i = 21; i <= totalCards; i++) {
-            for (int j = 1; j < 5; j++) {
-                String response = sender.Senders.allPorts2();
-                console.appendText(response + "\n");
-            }//end inner port loop
-        }//end outer card loop
-        console.appendText("\n");
-    }//end allPorts method
-
-    public void clearConsole(ActionEvent e){
-
-        console.clear();
-    }
-
-    public void pauseServer(ActionEvent e)throws Exception{
-
-        String response = sender.Senders.pauseServer();
-        if(response.equals("ok")) {
-            serverStatus.setTextFill(Color.RED);
-            serverStatus.setText("Paused");
-        }
-
-    }//end pause Server
-
-    public void runServer(ActionEvent e)throws Exception{
-
-        String response = sender.Senders.runServer();
-        if(response.equals("ok")) {
-            serverStatus.setTextFill(Color.GREEN);
-            serverStatus.setText("Running");
-        }
-
-    }//end pause Server
-
-    public void queryGeneral(ActionEvent e)throws Exception{
-
-        Socket s = new Socket(ipAddress.getText(), 63333);
-        String response = sender.Senders.queryGenQue(s);
-        console.appendText(response + "\n");
-
-    }//end query general queue
-
-    public void queryMaster(ActionEvent e)throws Exception{
-
-        String response = sender.Senders.queryMasQue();
-        console.appendText(response + "\n");
-
-    }//end query master queue
-
-    public void flushGeneral(ActionEvent e)throws Exception{
-
-        Socket s = new Socket(ipAddress.getText(), 63333);
-
-        String response = sender.Senders.flushGenQue(s);
-        console.appendText(response + "\n");
-
-        response = sender.Senders.queryGenQue(s);
-        console.appendText(response + "\n");
-
-    }
-
-    public void flushMaster(ActionEvent e)throws Exception{
-
-        String response = sender.Senders.flushMasQue();
-        console.appendText(response + "\n");
-
-        response = sender.Senders.queryMasQue();
-        console.appendText(response + "\n");
-
-    }
+//    public void allPorts(ActionEvent e)throws Exception {
+//
+//        int cardCheck = Integer.parseInt(numCards.getText());
+//        if(cardCheck < 1 || cardCheck >8){
+//            console.appendText("You must enter a card number from 1 - 8 \n");
+//            return;
+//        }
+//
+//        int totalCards = Integer.parseInt(numCards.getText());
+//        totalCards = totalCards + 20;
+//        //System.out.println(totalCards + "\n");
+//        for (int i = 21; i <= totalCards; i++) {
+//            for (int j = 1; j < 5; j++) {
+//                //System.out.println("card: " + i + " port: " + j + "\n");
+//                String response = sender.Senders.allPorts(mobNumber.getText(), i, j);
+//               console.appendText(response + "\n");
+//            }//end inner port loop
+//        }//end outer card loop
+//        console.appendText("\n");
+//
+//        for (int i = 21; i <= totalCards; i++) {
+//            for (int j = 1; j < 5; j++) {
+//                String response = sender.Senders.allPorts2();
+//                console.appendText(response + "\n");
+//            }//end inner port loop
+//        }//end outer card loop
+//        console.appendText("\n");
+//    }//end allPorts method
+//
+//    public void clearConsole(ActionEvent e){
+//
+//        console.clear();
+//    }
+//
+//    public void pauseServer(ActionEvent e)throws Exception{
+//
+//        String response = sender.Senders.pauseServer();
+//        if(response.equals("ok")) {
+//            serverStatus.setTextFill(Color.RED);
+//            serverStatus.setText("Paused");
+//        }
+//
+//    }//end pause Server
+//
+//    public void runServer(ActionEvent e)throws Exception{
+//
+//        String response = sender.Senders.runServer();
+//        if(response.equals("ok")) {
+//            serverStatus.setTextFill(Color.GREEN);
+//            serverStatus.setText("Running");
+//        }
+//
+//    }//end pause Server
+//
+//    public void queryGeneral(ActionEvent e)throws Exception{
+//
+//        Socket s = new Socket(ipAddress.getText(), 63333);
+//        String response = sender.Senders.queryGenQue(s);
+//        console.appendText(response + "\n");
+//
+//    }//end query general queue
+//
+//    public void queryMaster(ActionEvent e)throws Exception{
+//
+//        String response = sender.Senders.queryMasQue();
+//        console.appendText(response + "\n");
+//
+//    }//end query master queue
+//
+//    public void flushGeneral(ActionEvent e)throws Exception{
+//
+//        Socket s = new Socket(ipAddress.getText(), 63333);
+//
+//        String response = sender.Senders.flushGenQue(s);
+//        console.appendText(response + "\n");
+//
+//        response = sender.Senders.queryGenQue(s);
+//        console.appendText(response + "\n");
+//
+//    }
+//
+//    public void flushMaster(ActionEvent e)throws Exception{
+//
+//        String response = sender.Senders.flushMasQue();
+//        console.appendText(response + "\n");
+//
+//        response = sender.Senders.queryMasQue();
+//        console.appendText(response + "\n");
+//
+//    }
 
 }//end class

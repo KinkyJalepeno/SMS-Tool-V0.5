@@ -14,16 +14,14 @@ public class Connector implements Runnable{
 
     private TextArea console;
     private String ipAddress;
-    private String passWord;
-    private Label connStatus;
+        private Label connStatus;
 
     public Connector(TextArea console, String ipAddress, Label connStatus) {
 
         this.console = console;
         this.ipAddress = ipAddress;
-        this.passWord = passWord;
         this.connStatus = connStatus;
-            }
+    }
 
 
     @Override
