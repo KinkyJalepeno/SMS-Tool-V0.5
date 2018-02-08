@@ -44,29 +44,17 @@ public class Controller {
     @FXML private Label connStatus;
     @FXML private Label serverStatus;
 
-    public void authentication(ActionEvent e) throws Exception {
+    private Socket s;
 
-        boolean response = sender.Senders.authenticate(passWord.getText(), ipAddress.getText());
+    public void openSocket(ActionEvent e) throws Exception {
 
-        if(response == true){
-            connStatus.setTextFill(Color.GREEN);
-            connStatus.setText("Connected");
-            //console.clear();
-            console.appendText("Connected........... \n");
-        }//end if block
+        s = new Socket(ipAddress.getText(), 63333);
 
-        boolean status = sender.Senders.serverStatus();
-        if (status == true){
-            serverStatus.setTextFill(Color.GREEN);
-            serverStatus.setText("Running");
-        }else{
-            serverStatus.setTextFill(Color.RED);
-            serverStatus.setText("Paused");
-        }//end if else block
+        (new Thread(new Connector(console, ipAddress.getText(), passWord.getText(),connStatus))).start();
 
+        (new Thread(new GetStatus(serverStatus, console, passWord.getText(), s))).start();
 
-
-    }
+    }//end
 
     public void randSend(ActionEvent e)throws Exception{
 
