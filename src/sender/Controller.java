@@ -95,34 +95,21 @@ public class Controller {
 
     }//end allCard method
 
-//    public void allPorts(ActionEvent e)throws Exception {
-//
-//        int cardCheck = Integer.parseInt(numCards.getText());
-//        if(cardCheck < 1 || cardCheck >8){
-//            console.appendText("You must enter a card number from 1 - 8 \n");
-//            return;
-//        }
-//
-//        int totalCards = Integer.parseInt(numCards.getText());
-//        totalCards = totalCards + 20;
-//        //System.out.println(totalCards + "\n");
-//        for (int i = 21; i <= totalCards; i++) {
-//            for (int j = 1; j < 5; j++) {
-//                //System.out.println("card: " + i + " port: " + j + "\n");
-//                String response = sender.Senders.allPorts(mobNumber.getText(), i, j);
-//               console.appendText(response + "\n");
-//            }//end inner port loop
-//        }//end outer card loop
-//        console.appendText("\n");
-//
-//        for (int i = 21; i <= totalCards; i++) {
-//            for (int j = 1; j < 5; j++) {
-//                String response = sender.Senders.allPorts2();
-//                console.appendText(response + "\n");
-//            }//end inner port loop
-//        }//end outer card loop
-//        console.appendText("\n");
-//    }//end allPorts method
+    public void allPorts(ActionEvent e)throws Exception {
+
+        int cardCheck = Integer.parseInt(numCards.getText());
+        if(cardCheck < 1 || cardCheck >8){
+            console.appendText("You must enter a card number from 1 - 8 \n");
+            return;
+        }
+
+        int totalCards = Integer.parseInt(numCards.getText());
+        totalCards = totalCards + 20;
+
+        (new Thread(new AllCardsPorts(console, s, mobNumber.getText(), totalCards))).start();
+
+
+    }//end allPorts method
 //
 //    public void clearConsole(ActionEvent e){
 //

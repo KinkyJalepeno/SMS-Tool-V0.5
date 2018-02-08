@@ -32,7 +32,7 @@
       <Button fx:id="randPort" layoutX="20.0" layoutY="167.0" mnemonicParsing="false" onAction="#randSend" prefHeight="25.0" prefWidth="107.0" text="Random Port" />
       <Button fx:id="cardPort" layoutX="20.0" layoutY="207.0" mnemonicParsing="false" onAction="#cardPort" prefHeight="25.0" prefWidth="107.0" text="Card and Port" />
       <Button fx:id="allPorts" layoutX="20.0" layoutY="246.0" mnemonicParsing="false" onAction="#allCard" prefHeight="25.0" prefWidth="107.0" text="All Ports of Card" />
-      <Button fx:id="allCards" layoutX="20.0" layoutY="285.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="All Cards/Ports" />
+      <Button fx:id="allCards" layoutX="20.0" layoutY="285.0" mnemonicParsing="false" onAction="#allPorts" prefHeight="25.0" prefWidth="107.0" text="All Cards/Ports" />
       <Label layoutX="134.0" layoutY="211.0" prefHeight="17.0" prefWidth="52.0" text="Card" />
       <Label layoutX="220.0" layoutY="211.0" prefHeight="17.0" prefWidth="31.0" text="Port" />
       <TextField fx:id="card" layoutX="176.0" layoutY="207.0" prefHeight="25.0" prefWidth="31.0" />

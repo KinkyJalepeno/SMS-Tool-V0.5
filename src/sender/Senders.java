@@ -19,8 +19,7 @@ public class Senders {
 
  //    public static String allPorts(String mobNumber, int card, int port) throws IOException{
 //
-//        p.println("{\"number\": \"" + mobNumber + "\",\"msg\":\"" + card + " # " + port +
-//                "\",\"unicode\":\"2\",\"send_to_sim\":\"" + card + "#" + port + "\"}");
+//        p.println("{\"number\": \"" + mobNumber + "\",\"msg\":\"" + card + " # " + port + "\",\"unicode\":\"2\",\"send_to_sim\":\"" + card + "#" + port + "\"}");
 //        String response = bufRd.readLine();
 //        Object obj = JSONValue.parse(response);
 //        JSONObject jsonObject = (JSONObject) obj;
