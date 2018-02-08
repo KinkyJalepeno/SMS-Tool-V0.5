@@ -24,7 +24,7 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Button fx:id="clear" layoutX="401.0" layoutY="124.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Clear" />
+      <Button fx:id="clear" layoutX="401.0" layoutY="124.0" mnemonicParsing="false" onAction="#clearConsole" prefHeight="25.0" prefWidth="81.0" text="Clear" />
       <Button fx:id="connect" layoutX="183.0" layoutY="65.0" mnemonicParsing="false" onAction="#openSocket" prefHeight="25.0" prefWidth="107.0" text="Connect" />
       <TextField fx:id="ipAddress" layoutX="18.0" layoutY="18.0" prefHeight="17.0" prefWidth="107.0" promptText="IP Address" />
       <TextField fx:id="passWord" layoutX="183.0" layoutY="18.0" prefHeight="25.0" prefWidth="107.0" promptText="Password" />
@@ -55,18 +55,18 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Button fx:id="queryStand" layoutX="20.0" layoutY="367.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Query General" />
-      <Button fx:id="flushStand" layoutX="20.0" layoutY="403.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Flush General" />
-      <Button fx:id="queryMast" layoutX="179.0" layoutY="367.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Query Master" />
-      <Button fx:id="FlushMast" layoutX="179.0" layoutY="403.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Flush Master" />
+      <Button fx:id="queryStand" layoutX="20.0" layoutY="367.0" mnemonicParsing="false" onAction="#queryGeneral" prefHeight="25.0" prefWidth="107.0" text="Query General" />
+      <Button fx:id="flushStand" layoutX="20.0" layoutY="403.0" mnemonicParsing="false" onAction="#flushGeneral" prefHeight="25.0" prefWidth="107.0" text="Flush General" />
+      <Button fx:id="queryMast" layoutX="179.0" layoutY="367.0" mnemonicParsing="false" onAction="#queryMaster" prefHeight="25.0" prefWidth="107.0" text="Query Master" />
+      <Button fx:id="FlushMast" layoutX="179.0" layoutY="403.0" mnemonicParsing="false" onAction="#flushMaster" prefHeight="25.0" prefWidth="107.0" text="Flush Master" />
       <Label layoutX="305.0" layoutY="141.0" prefHeight="17.0" prefWidth="81.0" text="Console:" />
       <Label layoutX="22.0" layoutY="447.0" prefHeight="20.0" prefWidth="120.0" text="Server Run/Pause">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="runServer" layoutX="22.0" layoutY="475.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Run Server" />
-      <Button fx:id="pauseServer" layoutX="179.0" layoutY="475.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Pause Server" />
+      <Button fx:id="runServer" layoutX="22.0" layoutY="475.0" mnemonicParsing="false" onAction="#runServer" prefHeight="25.0" prefWidth="107.0" text="Run Server" />
+      <Button fx:id="pauseServer" layoutX="179.0" layoutY="475.0" mnemonicParsing="false" onAction="#pauseServer" prefHeight="25.0" prefWidth="107.0" text="Pause Server" />
       <Label layoutX="135.0" layoutY="289.0" prefHeight="17.0" prefWidth="107.0" text="Number of Cards" />
       <TextField fx:id="numCards" layoutX="255.0" layoutY="285.0" prefHeight="25.0" prefWidth="31.0" />
       <Label layoutX="182.0" layoutY="141.0" prefHeight="43.0" prefWidth="93.0" text="Cards use address - ie 21" textAlignment="CENTER" wrapText="true">

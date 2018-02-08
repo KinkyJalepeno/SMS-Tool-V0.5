@@ -1,9 +1,8 @@
 package sender;
 
-import javafx.application.Platform;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -14,7 +13,7 @@ public class Connector implements Runnable{
 
     private TextArea console;
     private String ipAddress;
-        private Label connStatus;
+    private Label connStatus;
 
     public Connector(TextArea console, String ipAddress, Label connStatus) {
 
@@ -29,11 +28,6 @@ public class Connector implements Runnable{
 
         try{
             Socket s = new Socket(ipAddress, 63333);
-
-            Platform.runLater(() -> {
-                connStatus.setTextFill(Color.GREEN);
-                connStatus.setText("Connected");
-            });
 
         } catch (IOException e) {
             console.appendText("Connection failed - check IP address\n");

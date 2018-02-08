@@ -7,13 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
-import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class Controller {
@@ -53,7 +47,7 @@ public class Controller {
 
         (new Thread(new Connector(console, ipAddress.getText(), connStatus))).start();
 
-        (new Thread(new GetStatus(serverStatus, console, passWord.getText(), s))).start();
+        (new Thread(new GetStatus(serverStatus, console, passWord.getText(), s, connStatus))).start();
         //s.close();
     }//end
 
@@ -110,67 +104,65 @@ public class Controller {
 
 
     }//end allPorts method
-//
-//    public void clearConsole(ActionEvent e){
-//
-//        console.clear();
-//    }
-//
-//    public void pauseServer(ActionEvent e)throws Exception{
-//
-//        String response = sender.Senders.pauseServer();
-//        if(response.equals("ok")) {
-//            serverStatus.setTextFill(Color.RED);
-//            serverStatus.setText("Paused");
-//        }
-//
-//    }//end pause Server
-//
-//    public void runServer(ActionEvent e)throws Exception{
-//
-//        String response = sender.Senders.runServer();
-//        if(response.equals("ok")) {
-//            serverStatus.setTextFill(Color.GREEN);
-//            serverStatus.setText("Running");
-//        }
-//
-//    }//end pause Server
-//
-//    public void queryGeneral(ActionEvent e)throws Exception{
-//
-//        Socket s = new Socket(ipAddress.getText(), 63333);
-//        String response = sender.Senders.queryGenQue(s);
-//        console.appendText(response + "\n");
-//
-//    }//end query general queue
-//
-//    public void queryMaster(ActionEvent e)throws Exception{
-//
-//        String response = sender.Senders.queryMasQue();
-//        console.appendText(response + "\n");
-//
-//    }//end query master queue
-//
-//    public void flushGeneral(ActionEvent e)throws Exception{
-//
-//        Socket s = new Socket(ipAddress.getText(), 63333);
-//
-//        String response = sender.Senders.flushGenQue(s);
-//        console.appendText(response + "\n");
-//
-//        response = sender.Senders.queryGenQue(s);
-//        console.appendText(response + "\n");
-//
-//    }
-//
-//    public void flushMaster(ActionEvent e)throws Exception{
-//
-//        String response = sender.Senders.flushMasQue();
-//        console.appendText(response + "\n");
-//
-//        response = sender.Senders.queryMasQue();
-//        console.appendText(response + "\n");
-//
-//    }
+
+    public void clearConsole(ActionEvent e){
+
+        console.clear();
+    }
+
+    public void pauseServer(ActionEvent e)throws Exception{
+
+        String response = sender.Senders.pauseServer(s);
+        if(response.equals("ok")) {
+            serverStatus.setTextFill(Color.RED);
+            serverStatus.setText("Paused");
+        }
+
+    }//end pause Server
+
+    public void runServer(ActionEvent e)throws Exception{
+
+        String response = sender.Senders.runServer(s);
+        if(response.equals("ok")) {
+            serverStatus.setTextFill(Color.GREEN);
+            serverStatus.setText("Running");
+        }
+
+    }//end pause Server
+
+    public void queryGeneral(ActionEvent e)throws Exception{
+
+        String response = sender.Senders.queryGenQue(s);
+        console.appendText(response + "\n");
+
+    }//end query general queue
+
+    public void queryMaster(ActionEvent e)throws Exception{
+
+
+        String response = sender.Senders.queryMasQue(s);
+        console.appendText(response + "\n");
+
+    }//end query master queue
+
+    public void flushGeneral(ActionEvent e)throws Exception{
+
+        String response = sender.Senders.flushGenQue(s);
+        console.appendText(response + "\n\n");
+
+        response = sender.Senders.queryGenQue(s);
+        console.appendText(response + "\n");
+
+    }
+
+    public void flushMaster(ActionEvent e)throws Exception{
+
+        String response = sender.Senders.flushMasQue(s);
+        console.appendText(response + "\n\n");
+
+        response = sender.Senders.queryMasQue(s);
+        console.appendText(response + "\n");
+
+    }
 
 }//end class
