@@ -18,72 +18,6 @@ public class Senders {
     private static Object obj;
     private static JSONObject jsonObject;
 
-    public static boolean authenticate(String passWord, String ipAddress) throws IOException{
-
-        s = new Socket(ipAddress, 63333);
-
-        p = new PrintWriter(s.getOutputStream(), true);
-        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
-
-        p.println("{\"method\":\"authentication\",\"server_password\":\"" + passWord + "\"}");
-        response = bufRd.readLine();
-        p.println("");
-        response = bufRd.readLine();
-
-        if(response.equals("SMS server connected")){
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean serverStatus() throws IOException{
-
-        p = new PrintWriter(s.getOutputStream(), true);
-        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
-
-        p.println("{\"method\":\"get_server_status\"}");
-        response = bufRd.readLine();
-
-        obj = JSONValue.parse(response);
-        jsonObject = (JSONObject) obj;
-
-        String status = (String) jsonObject.get("server_currently_status");
-        if(status.equals("Running")){
-            return true;
-        }
-        return false;
-    }
-
-    public static String sendRand(String mobNumber) throws IOException{
-
-        p = new PrintWriter(s.getOutputStream(), true);
-        bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
-
-        p.println("{\"number\":\"" + mobNumber + "\", \"msg\":\"Random port test\", \"unicode\":\"5\"}");
-
-        response = bufRd.readLine();
-        System.out.println(response);
-        obj = JSONValue.parse(response);
-        jsonObject = (JSONObject) obj;
-
-        String getReply = (String) jsonObject.get("reply");
-        response = bufRd.readLine();
-
-        System.out.println(response);
-        obj = JSONValue.parse(response);
-        jsonObject = (JSONObject) obj;
-
-        String number = (String) jsonObject.get("number");
-        String reply2 = (String) jsonObject.get("reply");
-        String cardAdd = (String) jsonObject.get("card_add");
-        String portNum = (String) jsonObject.get("port_num");
-
-        String collection = ("Status: " + getReply + "\nNumber: " + number + "\nCard: " + cardAdd + "\nPort: " +
-                portNum + "\nResult: " + reply2);
-
-        return collection;
-    }
-
     public static String cardPort(String mobNumber, String card, String port) throws IOException{
 
         p = new PrintWriter(s.getOutputStream(), true);
@@ -221,7 +155,7 @@ public class Senders {
 
     }//end
 
-    public static String queryGenQue()throws IOException {
+    public static String queryGenQue(Socket s)throws IOException {
 
         p = new PrintWriter(s.getOutputStream(), true);
         bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -253,7 +187,7 @@ public class Senders {
         return collection;
     }
 
-    public static String flushGenQue()throws IOException {
+    public static String flushGenQue(Socket s)throws IOException {
 
         p.println("{\"method\":\"delete_queue\"}");
         response = bufRd.readLine();

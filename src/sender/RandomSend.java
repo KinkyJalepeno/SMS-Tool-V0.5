@@ -43,20 +43,20 @@ public class RandomSend implements Runnable{
             JSONObject jsonObject = (JSONObject) obj;
 
             String getReply = (String) jsonObject.get("reply");
-
-            response = bufRd.readLine();
-
-            System.out.println(response);
-            obj = JSONValue.parse(response);
-            jsonObject = (JSONObject) obj;
-
-            String number = (String) jsonObject.get("number");
-            String reply2 = (String) jsonObject.get("reply");
-            String cardAdd = (String) jsonObject.get("card_add");
-            String portNum = (String) jsonObject.get("port_num");
-
-            console.appendText("Status: " + getReply + "\nNumber: " + number + "\nCard: " + cardAdd + "\nPort: " +
-                    portNum + "\nResult: " + reply2 + "\n");
+            console.appendText("Status: " + getReply + "\n");
+//            response = bufRd.readLine();
+//
+//            System.out.println(response);
+//            obj = JSONValue.parse(response);
+//            jsonObject = (JSONObject) obj;
+//
+//            String number = (String) jsonObject.get("number");
+//            String reply2 = (String) jsonObject.get("reply");
+//            String cardAdd = (String) jsonObject.get("card_add");
+//            String portNum = (String) jsonObject.get("port_num");
+//
+//            console.appendText("Status: " + getReply + "\nNumber: " + number + "\nCard: " + cardAdd + "\nPort: " +
+//                    portNum + "\nResult: " + reply2 + "\n");
         }catch(IOException e){
             e.printStackTrace();
         }//end try-catch

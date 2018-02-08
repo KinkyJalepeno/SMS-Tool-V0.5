@@ -12,6 +12,7 @@ import org.json.simple.JSONValue;
 
 import javax.swing.*;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
@@ -53,16 +54,14 @@ public class Controller {
         (new Thread(new Connector(console, ipAddress.getText(), connStatus))).start();
 
         (new Thread(new GetStatus(serverStatus, console, passWord.getText(), s))).start();
-
+        //s.close();
     }//end
 
     public void randSend(ActionEvent e)throws Exception{
 
         (new Thread(new RandomSend(mobNumber.getText(), s, console))).start();
-
-//        String response = sender.Senders.sendRand(mobNumber.getText());
-//        console.appendText(response +"\n\n");
-
+        (new Thread(new CollectResponses(s, console))).start();
+    //s.close();
     }//end randSend
 
     public void cardPort(ActionEvent e)throws Exception{
@@ -72,12 +71,15 @@ public class Controller {
                 console.appendText("You must enter a card address from 21 - 28 \n");
                 return;
         }
+        (new Thread(new SpecifyCardPort(mobNumber.getText(), s, console, card.getText(), port.getText()))).start();
 
-        String response = sender.Senders.cardPort(mobNumber.getText(), card.getText(), port.getText());
-        console.appendText(response + "\n");
+        (new Thread(new CollectResponses(s, console))).start();
 
-        response = sender.Senders.cardPort2();
-        console.appendText(response + "\n");
+//        String response = sender.Senders.cardPort(mobNumber.getText(), card.getText(), port.getText());
+//        console.appendText(response + "\n");
+//
+//        response = sender.Senders.cardPort2();
+//        console.appendText(response + "\n");
 
     }//end card/port method
 
@@ -156,7 +158,8 @@ public class Controller {
 
     public void queryGeneral(ActionEvent e)throws Exception{
 
-        String response = sender.Senders.queryGenQue();
+        Socket s = new Socket(ipAddress.getText(), 63333);
+        String response = sender.Senders.queryGenQue(s);
         console.appendText(response + "\n");
 
     }//end query general queue
@@ -170,10 +173,12 @@ public class Controller {
 
     public void flushGeneral(ActionEvent e)throws Exception{
 
-        String response = sender.Senders.flushGenQue();
+        Socket s = new Socket(ipAddress.getText(), 63333);
+
+        String response = sender.Senders.flushGenQue(s);
         console.appendText(response + "\n");
 
-        response = sender.Senders.queryGenQue();
+        response = sender.Senders.queryGenQue(s);
         console.appendText(response + "\n");
 
     }
