@@ -50,7 +50,7 @@ public class Controller {
 
         s = new Socket(ipAddress.getText(), 63333);
 
-        (new Thread(new Connector(console, ipAddress.getText(), passWord.getText(),connStatus))).start();
+        (new Thread(new Connector(console, ipAddress.getText(), connStatus))).start();
 
         (new Thread(new GetStatus(serverStatus, console, passWord.getText(), s))).start();
 
@@ -58,8 +58,10 @@ public class Controller {
 
     public void randSend(ActionEvent e)throws Exception{
 
-        String response = sender.Senders.sendRand(mobNumber.getText());
-        console.appendText(response +"\n\n");
+        (new Thread(new RandomSend(mobNumber.getText(), s, console))).start();
+
+//        String response = sender.Senders.sendRand(mobNumber.getText());
+//        console.appendText(response +"\n\n");
 
     }//end randSend
 
