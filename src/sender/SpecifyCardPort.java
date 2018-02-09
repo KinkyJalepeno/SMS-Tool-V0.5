@@ -40,15 +40,42 @@ public class SpecifyCardPort implements Runnable{
                         "\",\"unicode\":\"2\",\"send_to_sim\":\"" + card + "#" + port + "\"}");
 
             String response = bufRd.readLine();
+
             Object obj = JSONValue.parse(response);
             JSONObject jsonObject = (JSONObject) obj;
 
-            String part1 = (String) jsonObject.get("send_to_sim");
+            String part1 = (String) jsonObject.get("number");
             String part2 = (String) jsonObject.get("reply");
 
-            console.appendText("Send to sim: " + part1 + " Status: " + part2 + "\n");
+            console.appendText("Number: " + part1 + " Status: " + part2 +"\n");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
         }//end try-catch
+        getResponses();
     }//end run method
+
+    public void getResponses(){
+
+        try {
+            BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+            String response = bufRd.readLine();
+
+            System.out.println(response);
+            Object obj = JSONValue.parse(response);
+            JSONObject jsonObject = (JSONObject) obj;
+
+            String ccid = (String) jsonObject.get("ccid");
+            String reply2 = (String) jsonObject.get("reply");
+            String cardAdd = (String) jsonObject.get("card_add");
+            String portNum = (String) jsonObject.get("port_num");
+
+            console.appendText("Sim ID: " + ccid + "\nCard: " + cardAdd + "\nPort: " +
+                    portNum + "\nResult: " + reply2 + "\n");
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
 }//end class

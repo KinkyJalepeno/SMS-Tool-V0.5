@@ -52,7 +52,7 @@ public class AllCardsPorts implements Runnable {
                     String part1 = (String) jsonObject.get("send_to_sim");
                     String part2 = (String) jsonObject.get("reply");
 
-                    console.appendText("Send to sim: " + part1 + " Status: " + part2);
+                    console.appendText("Send to sim: " + part1 + " Status: " + part2 + "\n");
 
 
                 }//end inner port for loop

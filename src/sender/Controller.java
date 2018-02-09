@@ -54,7 +54,7 @@ public class Controller {
     public void randSend(ActionEvent e)throws Exception{
 
         (new Thread(new RandomSend(mobNumber.getText(), s, console))).start();
-        (new Thread(new CollectResponses(s, console))).start();
+        //(new Thread(new CollectResponses(s, console))).start();
     //s.close();
     }//end randSend
 
@@ -73,7 +73,7 @@ public class Controller {
 
         (new Thread(new SpecifyCardPort(mobNumber.getText(), s, console, card.getText(), port.getText()))).start();
 
-        (new Thread(new CollectResponses(s, console))).start();
+        //(new Thread(new CollectResponses(s, console))).start();
 
     }//end card/port method
 

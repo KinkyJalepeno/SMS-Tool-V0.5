@@ -39,27 +39,44 @@ public class RandomSend implements Runnable{
 
             String response = bufRd.readLine();
             System.out.println(response);
+
             Object obj = JSONValue.parse(response);
             JSONObject jsonObject = (JSONObject) obj;
 
-            String getReply = (String) jsonObject.get("reply");
-            console.appendText("Status: " + getReply + "\n");
-//            response = bufRd.readLine();
-//
-//            System.out.println(response);
-//            obj = JSONValue.parse(response);
-//            jsonObject = (JSONObject) obj;
-//
-//            String number = (String) jsonObject.get("number");
-//            String reply2 = (String) jsonObject.get("reply");
-//            String cardAdd = (String) jsonObject.get("card_add");
-//            String portNum = (String) jsonObject.get("port_num");
-//
-//            console.appendText("Status: " + getReply + "\nNumber: " + number + "\nCard: " + cardAdd + "\nPort: " +
-//                    portNum + "\nResult: " + reply2 + "\n");
+            String part1 = (String) jsonObject.get("number");
+            String part2 = (String) jsonObject.get("reply");
+
+            console.appendText("Number: " + part1 + " Status: " + part2 +"\n");
         }catch(IOException e){
             e.printStackTrace();
         }//end try-catch
 
+        getResponses();
+
     }//end run method
+
+    private void getResponses() {
+
+        try {
+            BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+            String response = bufRd.readLine();
+
+            System.out.println(response);
+            Object obj = JSONValue.parse(response);
+            JSONObject jsonObject = (JSONObject) obj;
+
+            String ccid = (String) jsonObject.get("ccid");
+            String reply2 = (String) jsonObject.get("reply");
+            String cardAdd = (String) jsonObject.get("card_add");
+            String portNum = (String) jsonObject.get("port_num");
+
+            console.appendText("Sim ID: " + ccid + "\nCard: " + cardAdd + "\nPort: " +
+                    portNum + "\nResult: " + reply2 + "\n");
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
 }//end class
