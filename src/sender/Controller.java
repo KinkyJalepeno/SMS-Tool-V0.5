@@ -53,9 +53,16 @@ public class Controller {
 
     public void randSend(ActionEvent e)throws Exception{
 
-        (new Thread(new RandomSend(mobNumber.getText(), s, console))).start();
-        //(new Thread(new CollectResponses(s, console))).start();
-    //s.close();
+        String status = sender.GetRunPause.getRunPause(s);
+        if(status.equals("Paused")) {
+        serverStatus.setTextFill(Color.RED);
+        serverStatus.setText(status);
+        console.setText("ERROR:  The server is in pause mode: \n");
+        }else{
+            serverStatus.setTextFill(Color.GREEN);
+            serverStatus.setText(status);
+            (new Thread(new RandomSend(mobNumber.getText(), s, console))).start();
+        }
     }//end randSend
 
     public void cardPort(ActionEvent e)throws Exception{
