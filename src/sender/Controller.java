@@ -1,11 +1,14 @@
 package sender;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
 import java.net.Socket;
@@ -41,6 +44,16 @@ public class Controller {
 
     private Socket s;
 
+    public void keyPressed(KeyEvent enter)throws Exception{
+        if(enter.getCode().isWhitespaceKey()){
+            s = new Socket(ipAddress.getText(), 63333);
+
+            (new Thread(new Connector(console, ipAddress.getText(), connStatus))).start();
+
+            (new Thread(new GetStatus(serverStatus, console, passWord.getText(), s, connStatus))).start();
+        }
+    }
+
     public void openSocket(ActionEvent e) throws Exception {
 
         s = new Socket(ipAddress.getText(), 63333);
@@ -57,7 +70,7 @@ public class Controller {
         if(status.equals("Paused")) {
         serverStatus.setTextFill(Color.RED);
         serverStatus.setText(status);
-        console.setText("ERROR:  The server is in pause mode: \n");
+        console.setText("ERROR:  The server is in pause mode: \nLog onto HMC and set run/scheduled \n");
         }else{
             serverStatus.setTextFill(Color.GREEN);
             serverStatus.setText(status);
@@ -77,10 +90,16 @@ public class Controller {
             console.appendText("You must enter a port number from 1 - 4 \n");
             return;
         }
-
-        (new Thread(new SpecifyCardPort(mobNumber.getText(), s, console, card.getText(), port.getText()))).start();
-
-        //(new Thread(new CollectResponses(s, console))).start();
+        String status = sender.GetRunPause.getRunPause(s);
+        if(status.equals("Paused")) {
+            serverStatus.setTextFill(Color.RED);
+            serverStatus.setText(status);
+            console.setText("ERROR:  The server is in pause mode: \nLog onto HMC and set run/scheduled \n");
+        }else{
+            serverStatus.setTextFill(Color.GREEN);
+            serverStatus.setText(status);
+            (new Thread(new SpecifyCardPort(mobNumber.getText(), s, console, card.getText(), port.getText()))).start();
+        }//end if - else
 
     }//end card/port method
 
@@ -91,9 +110,16 @@ public class Controller {
             console.appendText("You must enter a card address from 21 - 28 \n");
             return;
         }//end cardCheck
-
-        (new Thread(new AllCard(s, card2.getText(), console, mobNumber.getText()))).start();
-
+        String status = sender.GetRunPause.getRunPause(s);
+        if(status.equals("Paused")) {
+            serverStatus.setTextFill(Color.RED);
+            serverStatus.setText(status);
+            console.setText("ERROR:  The server is in pause mode: \nLog onto HMC and set run/scheduled \n");
+        }else {
+            serverStatus.setTextFill(Color.GREEN);
+            serverStatus.setText(status);
+            (new Thread(new AllCard(s, card2.getText(), console, mobNumber.getText()))).start();
+        }
     }//end allCard method
 
     public void allPorts(ActionEvent e)throws Exception {
@@ -107,7 +133,16 @@ public class Controller {
         int totalCards = Integer.parseInt(numCards.getText());
         totalCards = totalCards + 20;
 
-        (new Thread(new AllCardsPorts(console, s, mobNumber.getText(), totalCards))).start();
+        String status = sender.GetRunPause.getRunPause(s);
+        if(status.equals("Paused")) {
+            serverStatus.setTextFill(Color.RED);
+            serverStatus.setText(status);
+            console.setText("ERROR:  The server is in pause mode: \nLog onto HMC and set run/scheduled \n");
+        }else {
+            serverStatus.setTextFill(Color.GREEN);
+            serverStatus.setText(status);
+            (new Thread(new AllCardsPorts(console, s, mobNumber.getText(), totalCards))).start();
+        }//end if - else
 
 
     }//end allPorts method

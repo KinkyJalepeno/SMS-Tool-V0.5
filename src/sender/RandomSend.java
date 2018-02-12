@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class RandomSend implements Runnable{
 
@@ -32,6 +33,7 @@ public class RandomSend implements Runnable{
         console.appendText("Submitted.......................\n\n");
 
         try {
+            s.setSoTimeout(8000);
             PrintWriter p = new PrintWriter(s.getOutputStream(), true);
             BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
@@ -48,8 +50,8 @@ public class RandomSend implements Runnable{
 
             console.appendText("Number: " + part1 + " Status: " + part2 +"\n");
         }catch(IOException e){
-            e.printStackTrace();
-        }//end try-catch
+            console.appendText(e.getMessage()+ "\nCheck gateway connection \n");
+        }//end try - catch block
 
         getResponses();
 
@@ -58,6 +60,7 @@ public class RandomSend implements Runnable{
     private void getResponses() {
 
         try {
+            s.setSoTimeout(5000);
             BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
             String response = bufRd.readLine();
@@ -75,8 +78,8 @@ public class RandomSend implements Runnable{
                     portNum + "\nResult: " + reply2 + "\n");
 
         }catch(IOException e){
-            e.printStackTrace();
+            console.appendText(e.getMessage()+ ", Check sims\n");
         }
 
-    }
+    }//end getResponse method
 }//end class

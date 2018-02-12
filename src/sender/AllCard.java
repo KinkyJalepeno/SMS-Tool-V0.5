@@ -32,6 +32,7 @@ public class AllCard implements Runnable{
 
         for(int i = 1; i < 5; i++) {
             try {
+                s.setSoTimeout(8000);
                 PrintWriter p = new PrintWriter(s.getOutputStream(), true);
                 BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
@@ -48,9 +49,9 @@ public class AllCard implements Runnable{
                 String part2 = (String) jsonObject.get("reply");
 
                 console.appendText("Send to sim: " + part1 + " Status: " + part2 + "\n");
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }//end try-catch
+            } catch(IOException e){
+                console.appendText(e.getMessage()+ "\nCheck gateway connection \n");
+            }//end try - catch block
         }//end for loop
 
         getResponses();
@@ -60,6 +61,7 @@ public class AllCard implements Runnable{
     private void getResponses() {
 
         try {
+            s.setSoTimeout(5000);
             BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
             for(int i = 1; i < 5; i++){
@@ -74,8 +76,8 @@ public class AllCard implements Runnable{
 
                 console.appendText("Send to sim: " + part1 + " Status: " + part2 +"\n");
             }//end for loop
-        }catch (IOException e){
-            console.appendText(e.getMessage());
+        }catch(IOException e){
+            console.appendText(e.getMessage()+ ", Check sims\n");
         }//end try - catch
 
     }//end getResponse

@@ -35,6 +35,7 @@ public class AllCardsPorts implements Runnable {
 
 
         try {
+            s.setSoTimeout(8000);
             PrintWriter p = new PrintWriter(s.getOutputStream(), true);
             BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
@@ -58,7 +59,7 @@ public class AllCardsPorts implements Runnable {
                 }//end inner port for loop
             }//end outer card for loop
         }catch(IOException e){
-            console.appendText(e.getMessage());
+            console.appendText(e.getMessage()+ "\nCheck gateway connection \n");
         }//end try - catch block
         getResponses();
     }//end run method
@@ -66,6 +67,7 @@ public class AllCardsPorts implements Runnable {
     private void getResponses() {
 
         try {
+            s.setSoTimeout(5000);
             BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
             for(int card = 21; card <= totalCards; card++){
@@ -82,8 +84,8 @@ public class AllCardsPorts implements Runnable {
                     console.appendText("Send to sim: " + part1 + " Status: " + part2 + "\n");
                 }//end inner port loop
             }//end outer card loop
-        }catch (IOException e){
-            console.appendText(e.getMessage());
+        }catch(IOException e){
+            console.appendText(e.getMessage()+ ", Check sims\n");
         }//end try - catch
 
     }//end getResponse

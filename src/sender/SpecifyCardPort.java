@@ -33,6 +33,7 @@ public class SpecifyCardPort implements Runnable{
     public void run() {
 
         try {
+            s.setSoTimeout(8000);
             PrintWriter p = new PrintWriter(s.getOutputStream(), true);
             BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
@@ -48,15 +49,16 @@ public class SpecifyCardPort implements Runnable{
             String part2 = (String) jsonObject.get("reply");
 
             console.appendText("Number: " + part1 + " Status: " + part2 +"\n");
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-        }//end try-catch
+            } catch(IOException e){
+            console.appendText(e.getMessage()+ "\nCheck gateway connection \n");
+        }//end try - catch block
         getResponses();
     }//end run method
 
     public void getResponses(){
 
         try {
+            s.setSoTimeout(5000);
             BufferedReader bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
             String response = bufRd.readLine();
@@ -74,8 +76,8 @@ public class SpecifyCardPort implements Runnable{
                     portNum + "\nResult: " + reply2 + "\n");
 
         }catch(IOException e){
-            e.printStackTrace();
-        }
+            console.appendText(e.getMessage()+ ", Check sims\n");
+        }//end try - catch
 
     }
 }//end class

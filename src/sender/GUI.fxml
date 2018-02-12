@@ -28,7 +28,7 @@
       <Button fx:id="connect" layoutX="183.0" layoutY="65.0" mnemonicParsing="false" onAction="#openSocket" prefHeight="25.0" prefWidth="107.0" text="Connect" />
       <TextField fx:id="ipAddress" layoutX="18.0" layoutY="18.0" prefHeight="17.0" prefWidth="107.0" promptText="IP Address" />
       <TextField fx:id="passWord" layoutX="183.0" layoutY="18.0" prefHeight="25.0" prefWidth="107.0" promptText="Password" />
-      <TextField fx:id="mobNumber" layoutX="18.0" layoutY="65.0" onInputMethodTextChanged="#openSocket" prefHeight="17.0" prefWidth="107.0" promptText="Mobile Number" />
+      <TextField fx:id="mobNumber" layoutX="18.0" layoutY="65.0" onKeyPressed="#keyPressed" prefHeight="17.0" prefWidth="107.0" promptText="Mobile Number" />
       <Button fx:id="randPort" layoutX="20.0" layoutY="167.0" mnemonicParsing="false" onAction="#randSend" prefHeight="25.0" prefWidth="107.0" text="Random Port" />
       <Button fx:id="cardPort" layoutX="20.0" layoutY="207.0" mnemonicParsing="false" onAction="#cardPort" prefHeight="25.0" prefWidth="107.0" text="Card and Port" />
       <Button fx:id="allPorts" layoutX="20.0" layoutY="246.0" mnemonicParsing="false" onAction="#allCard" prefHeight="25.0" prefWidth="107.0" text="All Ports of Card" />

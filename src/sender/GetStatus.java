@@ -37,7 +37,7 @@ public class GetStatus implements Runnable {
 
     @Override
     public void run() {
-
+        console.clear();
         try{
             p = new PrintWriter(s.getOutputStream(), true);
             bufRd = new BufferedReader(new InputStreamReader(s.getInputStream()));

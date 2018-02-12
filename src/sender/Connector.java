@@ -25,7 +25,6 @@ public class Connector implements Runnable{
 
     @Override
     public void run() {
-
         try{
             Socket s = new Socket(ipAddress, 63333);
 
