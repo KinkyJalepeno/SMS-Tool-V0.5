@@ -16,18 +16,18 @@ import java.net.Socket;
 public class Controller {
 
 
-    @FXML private Button connect;
-    @FXML private Button randPort;
-    @FXML private Button cardPort;
-    @FXML private Button allPorts;
-    @FXML private Button allCards;
-    @FXML private Button queryStand;
-    @FXML private Button flushStand;
-    @FXML private Button queryMast;
-    @FXML private Button FlushMast;
-    @FXML private Button clear;
-    @FXML private Button runServer;
-    @FXML private Button pauseServer;
+//    @FXML private Button connect;
+//    @FXML private Button randPort;
+//    @FXML private Button cardPort;
+//    @FXML private Button allPorts;
+//    @FXML private Button allCards;
+//    @FXML private Button queryStand;
+//    @FXML private Button flushStand;
+//    @FXML private Button queryMast;
+//    @FXML private Button FlushMast;
+//    @FXML private Button clear;
+//    @FXML private Button runServer;
+//    @FXML private Button pauseServer;
 
     @FXML private TextField ipAddress;
     @FXML private TextField passWord;
@@ -44,15 +44,15 @@ public class Controller {
 
     private Socket s;
 
-    public void keyPressed(KeyEvent enter)throws Exception{
-        if(enter.getCode().isWhitespaceKey()){
-            s = new Socket(ipAddress.getText(), 63333);
-
-            (new Thread(new Connector(console, ipAddress.getText(), connStatus))).start();
-
-            (new Thread(new GetStatus(serverStatus, console, passWord.getText(), s, connStatus))).start();
-        }
-    }
+//    public void keyPressed(KeyEvent enter)throws Exception{
+//        if(enter.getCode().isWhitespaceKey()){
+//            s = new Socket(ipAddress.getText(), 63333);
+//
+//            (new Thread(new Connector(console, ipAddress.getText(), connStatus))).start();
+//
+//            (new Thread(new GetStatus(serverStatus, console, passWord.getText(), s, connStatus))).start();
+//        }
+//    }
 
     public void openSocket(ActionEvent e) throws Exception {
 
