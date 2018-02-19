@@ -1,33 +1,24 @@
 package sender;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
 import java.net.Socket;
+import java.net.URL;
+import java.sql.*;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable{
 
-
-//    @FXML private Button connect;
-//    @FXML private Button randPort;
-//    @FXML private Button cardPort;
-//    @FXML private Button allPorts;
-//    @FXML private Button allCards;
-//    @FXML private Button queryStand;
-//    @FXML private Button flushStand;
-//    @FXML private Button queryMast;
-//    @FXML private Button FlushMast;
-//    @FXML private Button clear;
-//    @FXML private Button runServer;
-//    @FXML private Button pauseServer;
+    ObservableList list = FXCollections.observableArrayList();
 
     @FXML private TextField ipAddress;
     @FXML private TextField passWord;
@@ -42,17 +33,11 @@ public class Controller {
     @FXML private Label connStatus;
     @FXML private Label serverStatus;
 
-    private Socket s;
+    @FXML private ChoiceBox<String> cBox;
 
-//    public void keyPressed(KeyEvent enter)throws Exception{
-//        if(enter.getCode().isWhitespaceKey()){
-//            s = new Socket(ipAddress.getText(), 63333);
-//
-//            (new Thread(new Connector(console, ipAddress.getText(), connStatus))).start();
-//
-//            (new Thread(new GetStatus(serverStatus, console, passWord.getText(), s, connStatus))).start();
-//        }
-//    }
+    private Socket s;
+    Connection conn = null;
+
 
     public void openSocket(ActionEvent e) throws Exception {
 
@@ -207,4 +192,71 @@ public class Controller {
 
     }
 
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loadData();
+    }
+
+    private void loadData() {
+
+        list.removeAll(list);
+
+        // SQLite connection string
+        String url = "jdbc:sqlite:C://sqlite/test.db";
+
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException s) {
+            System.out.println(s.getMessage());
+        }
+
+        String sql = "SELECT * FROM gateways";//construct db query
+
+        try (
+                Statement stmt  = conn.createStatement();
+                ResultSet rs    = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()) {
+
+                String site = rs.getString("site_name");
+                list.addAll(site);
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        cBox.getItems().addAll(list);//add site names to list
+    }
+
+    @FXML
+    private void selectSite(ActionEvent e){
+
+        String site = cBox.getValue();
+        if(site == null){
+            console.appendText("Please select a gateway from  the dropdown\n");
+        }else {
+            String sql = ("SELECT * FROM gateways WHERE site_name = " +"\"" + site + "\" ");
+
+            try (
+                    Statement stmt  = conn.createStatement();
+                    ResultSet rs    = stmt.executeQuery(sql)) {
+
+                //site = rs.getString("site_name");
+                String address = rs.getString("ip_address");
+                String password = rs.getString("password");
+
+                ipAddress.setText(address);
+                passWord.setText(password);
+
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+
+
+        }
+    }
 }//end class
