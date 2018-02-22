@@ -40,12 +40,12 @@ public class Controller implements Initializable{
         loadData();
     }
 
-    private void loadData() {
+    private void loadData(){
 
         list.removeAll(list);
 
         // SQLite connection string
-        String url = "jdbc:sqlite:C://sqlite/test.db";
+        String url = "jdbc:sqlite:C://sqlite/sites.db";
 
         try {
             conn = DriverManager.getConnection(url);
