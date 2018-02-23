@@ -261,16 +261,4 @@ public class MainWindowController implements Initializable{
 
     }
 
-    @FXML
-    private void addGateway()throws IOException {
-
-        Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("AddGateway.fxml"));
-        primaryStage.setTitle("Kinky Jalepenos' SMS Sender @2018");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
-
-//        AddWindowController add = new AddWindowController();
-//        add.openAddWindow();
-     }
 }//end class
