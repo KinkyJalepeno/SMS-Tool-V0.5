@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="212.0" prefWidth="187.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sender.AddGateway">
+<AnchorPane prefHeight="212.0" prefWidth="187.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sender.AddWindowController">
    <children>
       <TextField fx:id="siteName" layoutX="19.0" layoutY="22.0" />
       <Button fx:id="addGateway" layoutX="47.0" layoutY="178.0" mnemonicParsing="false" onAction="#addDetails" prefHeight="25.0" prefWidth="93.0" text="Add Gateway" />

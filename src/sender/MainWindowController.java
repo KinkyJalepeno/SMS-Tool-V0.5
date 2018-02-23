@@ -18,7 +18,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable{
+public class MainWindowController implements Initializable{
 
     ObservableList list = FXCollections.observableArrayList();
 
@@ -80,7 +80,7 @@ public class Controller implements Initializable{
         console.appendText("Site data pre-loaded\n");
     }
     @FXML
-    private void selectSite(ActionEvent e){
+    private void selectSite(){
 
         String site = cBox.getValue();
         if(site == null){
@@ -108,7 +108,7 @@ public class Controller implements Initializable{
     }
 
     @FXML
-    private void openSocket(ActionEvent e) throws Exception {
+    private void openSocket() throws Exception {
 
         s = new Socket(ipAddress.getText(), 63333);
 
@@ -118,7 +118,7 @@ public class Controller implements Initializable{
         //s.close();
     }//end
     @FXML
-    private void randSend(ActionEvent e)throws Exception{
+    private void randSend()throws Exception{
 
         String status = sender.GetRunPause.getRunPause(s);
         if(status.equals("Paused")) {
@@ -132,7 +132,7 @@ public class Controller implements Initializable{
         }
     }//end randSend
     @FXML
-    private void cardPort(ActionEvent e)throws Exception{
+    private void cardPort()throws Exception{
 
         int cardCheck = Integer.parseInt(card.getText());
             if(cardCheck < 21 || cardCheck >28){
@@ -157,7 +157,7 @@ public class Controller implements Initializable{
 
     }//end card/port method
     @FXML
-    private void allCard(ActionEvent e)throws Exception{
+    private void allCard()throws Exception{
 
         int cardCheck = Integer.parseInt(card2.getText());
         if(cardCheck < 21 || cardCheck >28){
@@ -176,7 +176,7 @@ public class Controller implements Initializable{
         }
     }//end allCard method
     @FXML
-    private void allPorts(ActionEvent e)throws Exception {
+    private void allPorts()throws Exception {
 
         int cardCheck = Integer.parseInt(numCards.getText());
         if(cardCheck < 1 || cardCheck >8){
@@ -201,12 +201,12 @@ public class Controller implements Initializable{
 
     }//end allPorts method
     @FXML
-    private void clearConsole(ActionEvent e){
+    private void clearConsole(){
 
         console.clear();
     }
     @FXML
-    private void pauseServer(ActionEvent e)throws Exception{
+    private void pauseServer()throws Exception{
 
         String response = sender.Senders.pauseServer(s);
         if(response.equals("ok")) {
@@ -216,7 +216,7 @@ public class Controller implements Initializable{
 
     }//end pause Server
     @FXML
-    private void runServer(ActionEvent e)throws Exception{
+    private void runServer()throws Exception{
 
         String response = sender.Senders.runServer(s);
         if(response.equals("ok")) {
@@ -226,14 +226,14 @@ public class Controller implements Initializable{
 
     }//end pause Server
     @FXML
-    private void queryGeneral(ActionEvent e)throws Exception{
+    private void queryGeneral()throws Exception{
 
         String response = sender.Senders.queryGenQue(s);
         console.appendText(response + "\n");
 
     }//end query general queue
     @FXML
-    private void queryMaster(ActionEvent e)throws Exception{
+    private void queryMaster()throws Exception{
 
 
         String response = sender.Senders.queryMasQue(s);
@@ -241,7 +241,7 @@ public class Controller implements Initializable{
 
     }//end query master queue
     @FXML
-    private void flushGeneral(ActionEvent e)throws Exception{
+    private void flushGeneral()throws Exception{
 
         String response = sender.Senders.flushGenQue(s);
         console.appendText(response + "\n\n");
@@ -251,7 +251,7 @@ public class Controller implements Initializable{
 
     }
     @FXML
-    private void flushMaster(ActionEvent e)throws Exception{
+    private void flushMaster()throws Exception{
 
         String response = sender.Senders.flushMasQue(s);
         console.appendText(response + "\n\n");
@@ -262,7 +262,7 @@ public class Controller implements Initializable{
     }
 
     @FXML
-    public void addGateway()throws IOException {
+    private void addGateway()throws IOException {
 
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("AddGateway.fxml"));
@@ -270,7 +270,7 @@ public class Controller implements Initializable{
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
-//        AddGateway add = new AddGateway();
+//        AddWindowController add = new AddWindowController();
 //        add.openAddWindow();
      }
 }//end class

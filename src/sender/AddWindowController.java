@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 
-public class AddGateway {
+public class AddWindowController {
 
     @FXML private TextField siteName;
     @FXML private TextField ipAddress;
@@ -22,7 +22,7 @@ public class AddGateway {
     private Connection conn;
 
 
-    public AddGateway(){
+    public AddWindowController(){
 
         this.conn = conn;
     }
