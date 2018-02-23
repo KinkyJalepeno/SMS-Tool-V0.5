@@ -4,10 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
 import java.sql.*;
@@ -257,9 +262,15 @@ public class Controller implements Initializable{
     }
 
     @FXML
-    public void addGateway() {
+    public void addGateway()throws IOException {
 
-        AddGateway add = new AddGateway();
-        add.openAddWindow();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("AddGateway.fxml"));
+        primaryStage.setTitle("Kinky Jalepenos' SMS Sender @2018");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+
+//        AddGateway add = new AddGateway();
+//        add.openAddWindow();
      }
 }//end class
