@@ -1,26 +1,15 @@
 package sender;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
-import java.sql.*;
 import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable{
-
-    ObservableList list = FXCollections.observableArrayList();
 
     @FXML private TextField ipAddress;
     @FXML private TextField passWord;
@@ -29,6 +18,7 @@ public class MainWindowController implements Initializable{
     @FXML private TextField port;
     @FXML private TextField mobNumber;
     @FXML private TextField numCards;
+    @FXML private TextField siteName;
 
     @FXML private TextArea console;
 
@@ -38,74 +28,23 @@ public class MainWindowController implements Initializable{
     @FXML private ChoiceBox<String> cBox;
 
     private Socket s;
-    Connection conn = null;
+    String url = "jdbc:sqlite:C://sqlite/sites.db";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadData();
-    }
 
-    private void loadData(){
-
-        list.removeAll(list);
-
-        // SQLite connection string
-        String url = "jdbc:sqlite:C://sqlite/sites.db";
-
-        try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException s) {
-            System.out.println(s.getMessage());
-        }
-        console.appendText("SQLite DB is connected\n" );
-
-        String sql = "SELECT * FROM gateways";//construct db query
-
-        try (
-                Statement stmt  = conn.createStatement();
-                ResultSet rs    = stmt.executeQuery(sql)){
-
-            // loop through the result set
-            while (rs.next()) {
-
-                String site = rs.getString("site_name");
-                list.addAll(site);
-
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        cBox.getItems().addAll(list);//add site names to list
-        console.appendText("Site data pre-loaded\n");
+       SiteList list = new SiteList(console, cBox, url);
+       list.readList();
     }
     @FXML
     private void selectSite(){
 
-        String site = cBox.getValue();
-        if(site == null){
-            console.appendText("Please select a gateway from  the drop-down\n");
-        }else {
-            String sql = ("SELECT * FROM gateways WHERE site_name = " +"\"" + site + "\" ");
-
-            try (
-                    Statement stmt  = conn.createStatement();
-                    ResultSet rs    = stmt.executeQuery(sql)) {
-
-                //site = rs.getString("site_name");
-                String address = rs.getString("ip_address");
-                String password = rs.getString("password");
-
-                ipAddress.setText(address);
-                passWord.setText(password);
-
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-
-
-        }
+        SelectSite site = new SelectSite(cBox, ipAddress, passWord, console, url, siteName);
+        site.selectSite();
     }
+
+
+
 
     @FXML
     private void openSocket() throws Exception {
